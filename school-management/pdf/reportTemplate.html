@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{REPORT_TITLE}}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Times New Roman", serif;
+            color: #000;
+            background: #fff;
+            font-size: 12px;
+        }
+
+        .report-wrapper {
+            border: 2px solid #000;
+            padding: 10px;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .title-box {
+            width: 280px;
+            margin: 0 auto 14px;
+            border: 2px solid #000;
+            text-align: center;
+            padding: 10px 12px;
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 1.25;
+        }
+
+        .school-strip {
+            border: 2px solid #000;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 10px;
+        }
+
+        .student-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .student-grid td {
+            border: 2px solid #000;
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+
+        .student-grid strong {
+            display: inline-block;
+            min-width: 110px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .results-table th,
+        .results-table td {
+            border: 2px solid #000;
+            padding: 5px 6px;
+            text-align: center;
+        }
+
+        .results-table th:first-child,
+        .results-table td:first-child {
+            text-align: left;
+        }
+
+        .section-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .section-table td,
+        .section-table th {
+            border: 2px solid #000;
+            padding: 7px 8px;
+            vertical-align: top;
+        }
+
+        .signature-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .signature-grid td {
+            border: 2px solid #000;
+            height: 54px;
+            padding: 8px;
+            vertical-align: bottom;
+            font-weight: 700;
+        }
+
+        .muted {
+            color: #444;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-wrapper">
+        <div class="header-meta">
+            <div>{{GENERATED_DATE}}</div>
+            <div>{{SCHOOL_NAME}}</div>
+        </div>
+
+        <div class="title-box">{{REPORT_TITLE}}</div>
+
+        <div class="school-strip">
+            <div>
+                {{SCHOOL_NAME}}<br>
+                <span class="muted">Official Student Academic Report</span>
+            </div>
+            <div>
+                Academic Year: {{ACADEMIC_YEAR}}<br>
+                Term: {{TERM}}<br>
+                Class: {{CLASS_NAME}}
+            </div>
+        </div>
+
+        <table class="student-grid">
+            <tr>
+                <td><strong>Student Name:</strong> {{STUDENT_NAME}}</td>
+                <td><strong>Admission No:</strong> {{ADMISSION_NUMBER}}</td>
+            </tr>
+            <tr>
+                <td><strong>Gender:</strong> {{GENDER}}</td>
+                <td><strong>Date of Birth:</strong> {{DOB}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Trade / Section:</strong> {{TRADE_SECTION}}</td>
+            </tr>
+        </table>
+
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>SUBJECT</th>
+                    <th>MAX</th>
+                    <th>EL</th>
+                    <th>ET</th>
+                    <th>TOTAL</th>
+                    <th>GRADE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{RESULT_ROWS}}
+            </tbody>
+        </table>
+
+        <table class="section-table">
+            <tr>
+                <td><strong>Total</strong></td>
+                <td>{{TOTAL_MARKS}} / {{MAX_MARKS}}</td>
+                <td><strong>Percentage</strong></td>
+                <td>{{PERCENTAGE}}</td>
+                <td><strong>Position</strong></td>
+                <td>{{POSITION}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Behavior / Conduct</strong></td>
+                <td colspan="4">{{BEHAVIOR_REMARKS}} (Discipline: {{DISCIPLINE_SCORE}})</td>
+            </tr>
+            <tr>
+                <td><strong>Teacher Comments</strong></td>
+                <td colspan="5">{{TEACHER_COMMENTS}}</td>
+            </tr>
+            <tr>
+                <td><strong>Head Teacher Comments</strong></td>
+                <td colspan="5">{{HEAD_TEACHER_COMMENTS}}</td>
+            </tr>
+            <tr>
+                <td><strong>Parent Comments</strong></td>
+                <td colspan="5">{{PARENT_COMMENTS}}</td>
+            </tr>
+        </table>
+
+        <table class="signature-grid">
+            <tr>
+                <td>Class Teacher Signature<br><span class="muted">{{CLASS_TEACHER_SIGNATURE}}</span></td>
+                <td>Head Teacher Signature<br><span class="muted">{{HEAD_TEACHER_SIGNATURE}}</span></td>
+                <td>Parent Signature<br><span class="muted">{{PARENT_SIGNATURE}}</span></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

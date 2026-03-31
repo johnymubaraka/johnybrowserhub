@@ -1,0 +1,55 @@
+{
+  "name": "johnybrowserhub",
+  "productName": "JohnyBrowserHub",
+  "version": "1.0.0",
+  "description": "Production Electron desktop wrapper for the hosted JohnyBrowserHub Firebase web app.",
+  "homepage": "https://johnybrowserhub.web.app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "prebuild": "node .\\scripts\\validate-electron-build-env.cjs",
+    "build": "electron-builder",
+    "publish": "electron-builder --publish always",
+    "open": "powershell -ExecutionPolicy Bypass -File .\\open-app.ps1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron-log": "^5.4.3",
+    "electron-updater": "^6.8.3",
+    "firebase": "^12.11.0"
+  },
+  "devDependencies": {
+    "electron": "^25.9.8",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.johnybrowserhub.app",
+    "productName": "JohnyBrowserHub",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "johnymubaraka",
+        "repo": "johnybrowserhub"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "pkg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  }
+}

@@ -1,0 +1,520 @@
+.school-dashboard-page {
+    background:
+        radial-gradient(circle at top right, rgba(73, 162, 255, 0.14), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(88, 224, 171, 0.12), transparent 28%),
+        rgba(7, 14, 29, 0.88);
+}
+
+.school-header-card {
+    background:
+        linear-gradient(145deg, rgba(73, 162, 255, 0.16), rgba(87, 220, 157, 0.08)),
+        rgba(255, 255, 255, 0.04);
+}
+
+.school-overview-card.is-highlight {
+    background:
+        radial-gradient(circle at top right, rgba(73, 162, 255, 0.22), transparent 52%),
+        rgba(255, 255, 255, 0.04);
+}
+
+.school-overview-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.school-overview-value {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.school-overview-footnote {
+    margin-top: 8px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.school-module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+}
+
+.school-dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 22px;
+}
+
+.school-role-sidebar {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(116, 201, 255, 0.18);
+    background: linear-gradient(145deg, rgba(10, 20, 44, 0.9), rgba(9, 35, 58, 0.72));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 22px 42px rgba(0, 0, 0, 0.22);
+}
+
+.school-role-content {
+    min-width: 0;
+    display: grid;
+    gap: 22px;
+}
+
+.school-role-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(116, 201, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: #dcecff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.school-role-link:hover,
+.school-role-link.is-active {
+    transform: translateY(-1px);
+    border-color: rgba(116, 201, 255, 0.3);
+    background: rgba(76, 206, 255, 0.14);
+}
+
+.school-module-panel-wide {
+    grid-column: 1 / -1;
+}
+
+.school-form-grid-entity {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.school-form-grid-entity .primary-button {
+    justify-self: start;
+}
+
+.school-form-grid-report {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.school-form-grid-report .school-textarea {
+    grid-column: span 2;
+}
+
+.school-form-grid-report .school-textarea.is-full {
+    grid-column: 1 / -1;
+}
+
+.school-record-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.school-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.school-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #dbe7ff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.school-pill.is-success {
+    background: rgba(86, 220, 157, 0.16);
+    color: #aef1ca;
+}
+
+.school-pill.is-info {
+    background: rgba(73, 162, 255, 0.16);
+    color: #cfe6ff;
+}
+
+.school-record-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.school-record-action {
+    border: 1px solid rgba(73, 162, 255, 0.22);
+    background: rgba(73, 162, 255, 0.12);
+    color: var(--text);
+}
+
+.school-record-note {
+    margin: 12px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.school-record-subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.school-form-help {
+    grid-column: 1 / -1;
+    margin: -2px 0 2px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.school-collection-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(73, 162, 255, 0.14);
+    color: #dcecff;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.school-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.school-hero-card {
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.school-hero-title {
+    margin: 10px 0 0;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.school-hero-copy {
+    margin: 10px 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.school-hero-stack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.school-stack-card {
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.school-stack-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 1.35rem;
+}
+
+.school-marks-toolbar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.school-marks-control {
+    display: grid;
+    gap: 8px;
+}
+
+.school-marks-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(4, 12, 26, 0.66);
+}
+
+.school-marks-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+}
+
+.school-marks-table th,
+.school-marks-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: middle;
+}
+
+.school-marks-table th {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 22, 44, 0.92);
+    color: #dcecff;
+    font-size: 0.82rem;
+    text-align: left;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.school-marks-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.school-marks-readonly {
+    background: rgba(255, 255, 255, 0.06);
+    color: #dcecff;
+}
+
+.school-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.school-analytics-panel {
+    padding: 24px;
+    border-radius: 28px;
+    border: 1px solid rgba(116, 201, 255, 0.18);
+    background: linear-gradient(145deg, rgba(10, 20, 44, 0.9), rgba(9, 35, 58, 0.72));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 22px 42px rgba(0, 0, 0, 0.22);
+}
+
+.school-analytics-panel-wide {
+    grid-column: 1 / -1;
+}
+
+.school-analytics-export-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.school-analytics-export-actions .primary-button,
+.school-analytics-export-actions .ghost-button {
+    min-width: 156px;
+}
+
+.school-analytics-export-actions button:disabled {
+    opacity: 0.72;
+    cursor: wait;
+}
+
+.school-analytics-filter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.school-analytics-filter-option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(73, 162, 255, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+}
+
+.school-analytics-filter-option input {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: #49a2ff;
+}
+
+.school-analytics-filter-copy {
+    display: grid;
+    gap: 4px;
+}
+
+.school-analytics-filter-copy strong {
+    font-size: 0.98rem;
+}
+
+.school-analytics-filter-copy span {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.school-chart-stack {
+    display: grid;
+    gap: 14px;
+}
+
+.school-chart-row {
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(73, 162, 255, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.school-chart-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.school-chart-head h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.school-chart-head p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.school-chart-head strong {
+    font-size: 1.02rem;
+    white-space: nowrap;
+}
+
+.school-chart-track {
+    margin-top: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.school-chart-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(73, 162, 255, 0.96), rgba(87, 220, 157, 0.92));
+}
+
+.school-ranking-table-wrap {
+    overflow-x: auto;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(4, 12, 26, 0.66);
+}
+
+.school-ranking-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+}
+
+.school-ranking-table th,
+.school-ranking-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: left;
+}
+
+.school-ranking-table th {
+    background: rgba(10, 22, 44, 0.92);
+    color: #dcecff;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.school-ranking-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.school-analytics-empty,
+.school-analytics-empty-cell {
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+}
+
+.school-analytics-empty {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px dashed rgba(73, 162, 255, 0.18);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.school-analytics-empty-cell {
+    padding: 24px;
+}
+
+@media (max-width: 1120px) {
+    .school-dashboard-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .school-role-sidebar {
+        position: static;
+    }
+
+    .school-overview-grid,
+    .school-module-grid,
+    .school-hero-grid,
+    .school-analytics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .school-marks-toolbar,
+    .school-form-grid-report {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .school-overview-grid,
+    .school-dashboard-layout,
+    .school-module-grid,
+    .school-hero-grid,
+    .school-hero-stack,
+    .school-analytics-grid,
+    .school-marks-toolbar,
+    .school-form-grid-entity,
+    .school-form-grid-report {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .school-form-grid-report .school-textarea,
+    .school-form-grid-report .school-textarea.is-full {
+        grid-column: auto;
+    }
+
+    .school-record-head {
+        flex-direction: column;
+    }
+
+    .school-pill-row {
+        justify-content: flex-start;
+    }
+
+    .school-analytics-export-actions {
+        justify-content: flex-start;
+    }
+
+    .school-analytics-export-actions .primary-button,
+    .school-analytics-export-actions .ghost-button {
+        width: 100%;
+    }
+}

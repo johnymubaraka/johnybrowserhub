@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Entry and Reports</title>
+    <link rel="stylesheet" href="school.css">
+</head>
+<body class="module-page">
+    <div class="module-wrap">
+        <div class="module-header">
+            <div>
+                <h1 class="module-title">Marks Entry and Report Cards</h1>
+                <p class="module-copy">Enter subject marks, auto-calculate totals, percentage, and grade, then generate the official PDF report card.</p>
+            </div>
+            <span id="results-status" class="status-banner">Loading results workspace...</span>
+        </div>
+
+        <section class="glass-form">
+            <form id="results-form">
+                <div class="form-grid-wide">
+                    <div>
+                        <label for="student-select">Student</label>
+                        <select id="student-select" required></select>
+                    </div>
+                    <div>
+                        <label for="school-name">School Name</label>
+                        <input id="school-name" type="text" value="JohnyBrowserHub Pro School">
+                    </div>
+                    <div>
+                        <label for="academic-year">Academic Year</label>
+                        <input id="academic-year" type="text" value="2026">
+                    </div>
+                    <div>
+                        <label for="term">Term</label>
+                        <input id="term" type="text" value="Term I">
+                    </div>
+                    <div>
+                        <label for="position">Position</label>
+                        <input id="position" type="text" placeholder="e.g. 1 out of 43">
+                    </div>
+                    <div>
+                        <label for="discipline-score">Discipline Score</label>
+                        <input id="discipline-score" type="text" placeholder="e.g. Excellent">
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label for="behavior-remarks">Behavior Remarks</label>
+                        <textarea id="behavior-remarks" placeholder="Behavior and conduct remarks"></textarea>
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label for="teacher-comments">Teacher Comments</label>
+                        <textarea id="teacher-comments" placeholder="Teacher comments"></textarea>
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label for="headteacher-comments">Head Teacher Comments</label>
+                        <textarea id="headteacher-comments" placeholder="Head teacher comments"></textarea>
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label for="parent-comments">Parent Comments</label>
+                        <textarea id="parent-comments" placeholder="Parent or guardian comments"></textarea>
+                    </div>
+                </div>
+
+                <div class="module-header" style="margin-top: 18px;">
+                    <div>
+                        <h2 class="section-title">Subject Marks</h2>
+                        <p class="table-caption">Enter EL and ET marks. Total, percentage, and grade update automatically.</p>
+                    </div>
+                    <button id="add-subject-row" class="ghost-button" type="button">Add Subject Row</button>
+                </div>
+
+                <div id="subject-rows"></div>
+
+                <div class="summary-row">
+                    <div class="summary-box">
+                        <span class="stat-label">Total Marks</span>
+                        <strong id="summary-total">0</strong>
+                    </div>
+                    <div class="summary-box">
+                        <span class="stat-label">Percentage</span>
+                        <strong id="summary-percentage">0%</strong>
+                    </div>
+                    <div class="summary-box">
+                        <span class="stat-label">Overall Grade</span>
+                        <strong id="summary-grade">F</strong>
+                    </div>
+                </div>
+
+                <div style="margin-top: 18px;">
+                    <button class="action-button" type="submit">Save Report Card Data</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="glass-table" style="margin-top: 18px;">
+            <div class="module-header">
+                <div>
+                    <h2 class="section-title">Saved Reports</h2>
+                    <p class="table-caption">Generate the official PDF at any time from these saved marks.</p>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Class</th>
+                            <th>Term</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                            <th>Grade</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reports-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <template id="subject-row-template">
+        <div class="subject-row-grid">
+            <div>
+                <label>Subject</label>
+                <input data-key="subjectName" type="text" required>
+            </div>
+            <div>
+                <label>MAX</label>
+                <input data-key="max" type="number" min="1" value="100" required>
+            </div>
+            <div>
+                <label>EL</label>
+                <input data-key="el" type="number" min="0" value="0" required>
+            </div>
+            <div>
+                <label>ET</label>
+                <input data-key="et" type="number" min="0" value="0" required>
+            </div>
+            <div>
+                <label>TOTAL</label>
+                <input data-key="total" type="text" readonly>
+            </div>
+            <div>
+                <label>GRADE</label>
+                <input data-key="grade" type="text" readonly>
+            </div>
+            <div>
+                <button class="danger-button" type="button" data-action="remove-row">Remove</button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        const studentSelect = document.getElementById("student-select");
+        const resultsStatus = document.getElementById("results-status");
+        const resultsForm = document.getElementById("results-form");
+        const subjectRows = document.getElementById("subject-rows");
+        const subjectRowTemplate = document.getElementById("subject-row-template");
+        const reportsTableBody = document.getElementById("reports-table-body");
+        const summaryTotal = document.getElementById("summary-total");
+        const summaryPercentage = document.getElementById("summary-percentage");
+        const summaryGrade = document.getElementById("summary-grade");
+
+        function setStatus(message, state = "warning") {
+            resultsStatus.textContent = message;
+            resultsStatus.dataset.state = state;
+        }
+
+        function notifyDashboard() {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: "school-data-updated" }, "*");
+            }
+        }
+
+        function calculateGrade(percentage) {
+            if (percentage >= 80) return "A";
+            if (percentage >= 70) return "B";
+            if (percentage >= 60) return "C";
+            if (percentage >= 50) return "D";
+            if (percentage >= 40) return "E";
+            return "F";
+        }
+
+        function addSubjectRow(values = {}) {
+            const fragment = subjectRowTemplate.content.cloneNode(true);
+            const row = fragment.querySelector(".subject-row-grid");
+            const subjectNameInput = row.querySelector('[data-key="subjectName"]');
+            const maxInput = row.querySelector('[data-key="max"]');
+            const elInput = row.querySelector('[data-key="el"]');
+            const etInput = row.querySelector('[data-key="et"]');
+            const totalInput = row.querySelector('[data-key="total"]');
+            const gradeInput = row.querySelector('[data-key="grade"]');
+
+            subjectNameInput.value = values.subjectName || "";
+            maxInput.value = values.max || 100;
+            elInput.value = values.el || 0;
+            etInput.value = values.et || 0;
+
+            function recalculateRow() {
+                const max = Number(maxInput.value) || 1;
+                const el = Number(elInput.value) || 0;
+                const et = Number(etInput.value) || 0;
+                const total = Math.round((el + et) * 10) / 10;
+                const percentage = Math.round(((total / max) * 100) * 10) / 10;
+
+                totalInput.value = total;
+                gradeInput.value = calculateGrade(percentage);
+                updateSummary();
+            }
+
+            row.querySelectorAll("input").forEach((input) => {
+                input.addEventListener("input", recalculateRow);
+            });
+
+            row.querySelector('[data-action="remove-row"]').addEventListener("click", () => {
+                row.remove();
+                updateSummary();
+            });
+
+            subjectRows.appendChild(fragment);
+            recalculateRow();
+        }
+
+        function collectSubjects() {
+            return Array.from(subjectRows.querySelectorAll(".subject-row-grid")).map((row) => ({
+                subjectName: row.querySelector('[data-key="subjectName"]').value.trim(),
+                max: row.querySelector('[data-key="max"]').value,
+                el: row.querySelector('[data-key="el"]').value,
+                et: row.querySelector('[data-key="et"]').value
+            })).filter((row) => row.subjectName);
+        }
+
+        function updateSummary() {
+            const rows = Array.from(subjectRows.querySelectorAll(".subject-row-grid"));
+            const total = rows.reduce((sum, row) => sum + (Number(row.querySelector('[data-key="total"]').value) || 0), 0);
+            const max = rows.reduce((sum, row) => sum + (Number(row.querySelector('[data-key="max"]').value) || 0), 0);
+            const percentage = max > 0 ? Math.round(((total / max) * 100) * 10) / 10 : 0;
+
+            summaryTotal.textContent = total.toFixed(1);
+            summaryPercentage.textContent = `${percentage.toFixed(1)}%`;
+            summaryGrade.textContent = calculateGrade(percentage);
+        }
+
+        async function loadStudents() {
+            const response = await fetch("/api/students", { cache: "no-store" });
+            const payload = await response.json();
+
+            if (!response.ok || !payload.success) {
+                throw new Error(payload.error || "Could not load students.");
+            }
+
+            studentSelect.innerHTML = payload.students.length
+                ? payload.students.map((student) => `<option value="${student.id}">${student.name} • ${student.className}</option>`).join("")
+                : '<option value="">No students available</option>';
+        }
+
+        function renderReports(reports) {
+            reportsTableBody.innerHTML = reports.map((report) => `
+                <tr>
+                    <td>${report.studentName}</td>
+                    <td>${report.className}</td>
+                    <td>${report.term}</td>
+                    <td>${report.totalMarks} / ${report.maxMarks}</td>
+                    <td>${report.percentage}%</td>
+                    <td>${report.overallGrade}</td>
+                    <td><button class="ghost-button" type="button" data-report-id="${report.id}">Generate PDF</button></td>
+                </tr>
+            `).join("") || `
+                <tr>
+                    <td colspan="7">No saved reports yet.</td>
+                </tr>
+            `;
+
+            reportsTableBody.querySelectorAll("[data-report-id]").forEach((button) => {
+                button.addEventListener("click", () => generatePdf(button.dataset.reportId));
+            });
+        }
+
+        async function loadReports() {
+            const response = await fetch("/api/results", { cache: "no-store" });
+            const payload = await response.json();
+
+            if (!response.ok || !payload.success) {
+                throw new Error(payload.error || "Could not load saved reports.");
+            }
+
+            renderReports(payload.reports);
+        }
+
+        async function generatePdf(reportId) {
+            try {
+                setStatus("Generating PDF report card...", "warning");
+                const response = await fetch(`/api/results/${encodeURIComponent(reportId)}/pdf`, {
+                    method: "POST"
+                });
+                const payload = await response.json();
+
+                if (!response.ok || !payload.success) {
+                    throw new Error(payload.error || "Could not generate PDF.");
+                }
+
+                const link = document.createElement("a");
+                link.href = payload.downloadUrl;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.click();
+                setStatus(`PDF ready: ${payload.fileName}`, "success");
+            } catch (error) {
+                setStatus(error.message || "Could not generate PDF.", "error");
+            }
+        }
+
+        document.getElementById("add-subject-row").addEventListener("click", () => addSubjectRow());
+
+        resultsForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const payload = {
+                studentId: studentSelect.value,
+                schoolName: document.getElementById("school-name").value.trim(),
+                academicYear: document.getElementById("academic-year").value.trim(),
+                term: document.getElementById("term").value.trim(),
+                position: document.getElementById("position").value.trim(),
+                disciplineScore: document.getElementById("discipline-score").value.trim(),
+                behaviorRemarks: document.getElementById("behavior-remarks").value.trim(),
+                teacherComments: document.getElementById("teacher-comments").value.trim(),
+                headTeacherComments: document.getElementById("headteacher-comments").value.trim(),
+                parentComments: document.getElementById("parent-comments").value.trim(),
+                subjects: collectSubjects()
+            };
+
+            try {
+                const response = await fetch("/api/results", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.error || "Could not save report.");
+                }
+
+                setStatus(`Report for ${result.report.studentName} saved successfully.`, "success");
+                notifyDashboard();
+                loadReports();
+            } catch (error) {
+                setStatus(error.message || "Could not save report.", "error");
+            }
+        });
+
+        async function initialize() {
+            try {
+                await loadStudents();
+                addSubjectRow();
+                await loadReports();
+                setStatus("Results workspace ready.", "success");
+            } catch (error) {
+                setStatus(error.message || "Could not initialize results workspace.", "error");
+            }
+        }
+
+        initialize();
+    </script>
+</body>
+</html>

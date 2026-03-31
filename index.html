@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JohnyBrowserHub Login</title>
+    <link rel="icon" type="image/svg+xml" href="assets/app-icon.svg">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0c112a;
+            --panel-border: rgba(110, 156, 255, 0.24);
+            --panel-glow: rgba(75, 167, 255, 0.22);
+            --text: #f6f8ff;
+            --muted: #c5d4f3;
+            --accent: #4eb7ff;
+            --card: rgba(10, 18, 51, 0.88);
+            --card-strong: rgba(18, 32, 87, 0.95);
+            --shadow: 0 30px 70px rgba(3, 8, 28, 0.56);
+            --line: rgba(255, 255, 255, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 14% 70%, rgba(91, 135, 255, 0.18), transparent 22%),
+                radial-gradient(circle at 82% 84%, rgba(72, 157, 255, 0.2), transparent 20%),
+                linear-gradient(180deg, #10162f 0%, #0a0f28 100%);
+            color: var(--text);
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            padding: 28px;
+            overflow: auto;
+        }
+
+        .auth-page {
+            width: min(1180px, 100%);
+            display: grid;
+            gap: 18px;
+        }
+
+        .auth-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .school-entry-band {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) auto;
+            gap: 22px;
+            align-items: center;
+            padding: 22px 26px;
+            border-radius: 28px;
+            border: 1px solid rgba(111, 201, 255, 0.24);
+            background:
+                radial-gradient(circle at top left, rgba(53, 166, 255, 0.2), transparent 30%),
+                linear-gradient(140deg, rgba(9, 24, 60, 0.96), rgba(10, 17, 45, 0.98));
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 24px 58px rgba(3, 8, 28, 0.44);
+        }
+
+        .school-entry-copy h2 {
+            margin: 0;
+            font-size: clamp(1.4rem, 2vw, 1.95rem);
+            letter-spacing: -0.03em;
+        }
+
+        .school-entry-copy p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .school-entry-kicker {
+            margin: 0 0 8px;
+            color: #8dd9ff;
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .school-entry-button {
+            width: auto;
+            min-width: min(100%, 320px);
+            padding: 0 26px;
+            border-color: rgba(108, 234, 199, 0.28);
+            background: linear-gradient(180deg, #27b889, #168365);
+            color: #f7fffc;
+            font-size: 1rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 18px 34px rgba(11, 71, 58, 0.34);
+        }
+
+        .auth-panel {
+            position: relative;
+            overflow: hidden;
+            min-height: 720px;
+            padding: 18px;
+            border-radius: 30px;
+            border: 1px solid var(--panel-border);
+            background:
+                linear-gradient(180deg, rgba(34, 51, 120, 0.16), transparent 22%),
+                linear-gradient(180deg, rgba(10, 16, 47, 0.98), rgba(12, 16, 49, 0.98));
+            box-shadow: var(--shadow);
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .auth-panel::before,
+        .auth-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .auth-panel::before {
+            background:
+                radial-gradient(circle at 18% 38%, rgba(95, 186, 255, 0.22), transparent 18%),
+                radial-gradient(circle at 82% 44%, rgba(208, 129, 255, 0.18), transparent 16%),
+                radial-gradient(circle at 50% 88%, rgba(87, 230, 255, 0.26), transparent 18%);
+            opacity: 0.9;
+        }
+
+        .auth-panel::after {
+            inset: auto;
+            left: -12%;
+            right: -12%;
+            bottom: -16%;
+            height: 34%;
+            background:
+                radial-gradient(circle at 50% 12%, rgba(123, 224, 255, 0.42), transparent 36%),
+                radial-gradient(circle at 50% 44%, rgba(124, 106, 255, 0.24), transparent 34%);
+            filter: blur(16px);
+            opacity: 0.95;
+        }
+
+        .auth-panel.is-active {
+            border-color: rgba(113, 191, 255, 0.44);
+            box-shadow:
+                0 0 0 1px rgba(88, 187, 255, 0.14),
+                0 34px 78px rgba(4, 11, 35, 0.62);
+            transform: translateY(-2px);
+        }
+
+        .auth-panel-shell {
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-hero {
+            position: relative;
+            height: 194px;
+            border-radius: 18px 18px 26px 26px;
+            border: 1px solid rgba(115, 175, 255, 0.22);
+            background:
+                linear-gradient(180deg, rgba(3, 9, 25, 0.14), transparent 16%),
+                radial-gradient(circle at 50% 82%, rgba(148, 245, 255, 0.88), transparent 24%),
+                linear-gradient(180deg, rgba(23, 38, 102, 0.96), rgba(9, 18, 52, 0.98));
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .auth-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 18px),
+                linear-gradient(90deg, transparent 0%, rgba(90, 168, 255, 0.2) 16%, transparent 32%, rgba(161, 117, 255, 0.16) 74%, transparent 100%);
+            opacity: 0.6;
+        }
+
+        .auth-hero::after {
+            content: "";
+            position: absolute;
+            left: -6%;
+            right: -6%;
+            bottom: -16%;
+            height: 46%;
+            border-radius: 50%;
+            border: 2px solid rgba(120, 215, 255, 0.26);
+            box-shadow:
+                0 -2px 0 rgba(255, 255, 255, 0.08) inset,
+                0 0 26px rgba(68, 190, 255, 0.24);
+        }
+
+        .hero-side-glow,
+        .hero-side-glow-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 22%;
+            background:
+                linear-gradient(180deg, transparent, rgba(99, 189, 255, 0.14), transparent),
+                linear-gradient(90deg, rgba(255, 77, 150, 0.42), transparent 42%);
+            filter: blur(2px);
+            opacity: 0.9;
+        }
+
+        .hero-side-glow {
+            left: 0;
+        }
+
+        .hero-side-glow-right {
+            right: 0;
+            transform: scaleX(-1);
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 72px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(155, 215, 255, 0.38);
+            background: linear-gradient(180deg, rgba(55, 155, 255, 0.86), rgba(34, 86, 196, 0.92));
+            color: #eff8ff;
+            text-align: center;
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            box-shadow: 0 12px 28px rgba(14, 41, 122, 0.32);
+        }
+
+        .hero-brand {
+            position: absolute;
+            top: 88px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0 24px;
+            color: #e6f4ff;
+            font-size: clamp(1.4rem, 2vw, 2rem);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .auth-console {
+            margin: -12px 22px 0;
+            padding: 34px 30px 26px;
+            border-radius: 26px;
+            border: 1px solid rgba(120, 168, 255, 0.22);
+            background:
+                linear-gradient(180deg, rgba(27, 44, 108, 0.16), transparent 18%),
+                linear-gradient(180deg, rgba(15, 29, 83, 0.96), rgba(15, 26, 71, 0.96));
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 18px 36px rgba(5, 11, 36, 0.4);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            position: relative;
+        }
+
+        .auth-console::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 26px;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+        }
+
+        .console-head,
+        .auth-status,
+        .auth-helper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .console-head {
+            text-align: center;
+        }
+
+        .console-head h1 {
+            margin: 0;
+            font-size: clamp(2.15rem, 3vw, 3rem);
+            line-height: 1.02;
+            letter-spacing: -0.04em;
+        }
+
+        .console-head p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .console-actions {
+            margin-top: 28px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .action-button,
+        .submit-button,
+        .inline-link,
+        .forgot-link {
+            font: inherit;
+        }
+
+        .action-button,
+        .submit-button {
+            width: 100%;
+            min-height: 58px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .action-button:hover,
+        .submit-button:hover,
+        .inline-link:hover,
+        .forgot-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .action-button:disabled,
+        .submit-button:disabled,
+        .forgot-link:disabled {
+            cursor: wait;
+            opacity: 0.72;
+            transform: none;
+        }
+
+        .email-button {
+            border-color: rgba(255, 255, 255, 0.22);
+            background: linear-gradient(180deg, #ffffff, #dfe9fb);
+            color: #294173;
+            font-size: 1rem;
+            font-weight: 800;
+            box-shadow: 0 14px 28px rgba(7, 14, 42, 0.24);
+        }
+
+        .google-button {
+            border-color: rgba(104, 157, 255, 0.42);
+            background: linear-gradient(180deg, #2b65d6, #1f4ea7);
+            color: #f8fbff;
+            font-size: 1rem;
+            font-weight: 800;
+            box-shadow: 0 14px 28px rgba(8, 18, 60, 0.28);
+        }
+
+        .google-button-dark {
+            border-color: rgba(255, 255, 255, 0.14);
+            background: linear-gradient(180deg, #233455, #16233f);
+        }
+
+        .action-icon,
+        .google-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .action-icon {
+            background: linear-gradient(180deg, #6ea3eb, #4875ba);
+            color: #eef6ff;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .google-mark {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 1.85rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .action-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(247, 250, 255, 0.76);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .action-divider::before,
+        .action-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0));
+        }
+
+        .signup-drawer,
+        .login-form {
+            margin-top: 18px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .signup-drawer[hidden] {
+            display: none;
+        }
+
+        .form-field {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 52px;
+            padding: 0 14px;
+            border: 1px solid rgba(160, 190, 255, 0.16);
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(26, 43, 95, 0.9), rgba(20, 32, 78, 0.82));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .form-field:focus-within {
+            border-color: rgba(93, 191, 255, 0.78);
+            box-shadow: 0 0 0 4px rgba(41, 160, 255, 0.14);
+        }
+
+        .form-field-icon {
+            width: 18px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.98rem;
+            font-weight: 800;
+            flex: 0 0 auto;
+        }
+
+        .form-field input {
+            width: 100%;
+            padding: 0;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.97rem;
+        }
+
+        .form-field select {
+            width: 100%;
+            padding: 0;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.97rem;
+            appearance: none;
+        }
+
+        .form-field input::placeholder {
+            color: rgba(226, 237, 255, 0.76);
+        }
+
+        .form-group {
+            display: grid;
+            gap: 6px;
+        }
+
+        .form-group-label {
+            color: rgba(220, 233, 255, 0.88);
+            font-size: 0.86rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .signup-tab-bar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .signup-tab {
+            min-height: 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(110, 156, 255, 0.24);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, color 0.18s ease;
+        }
+
+        .signup-tab:hover {
+            transform: translateY(-1px);
+        }
+
+        .signup-tab.is-active {
+            border-color: rgba(78, 183, 255, 0.64);
+            background: linear-gradient(180deg, rgba(43, 101, 214, 0.92), rgba(26, 72, 159, 0.96));
+            color: #f8fbff;
+            box-shadow: 0 14px 28px rgba(8, 18, 60, 0.22);
+        }
+
+        .signup-role-copy {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .signup-role-form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .signup-role-form[hidden] {
+            display: none;
+        }
+
+        .role-static-field {
+            min-height: 52px;
+            padding: 12px 14px;
+            border: 1px solid rgba(160, 190, 255, 0.16);
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(26, 43, 95, 0.9), rgba(20, 32, 78, 0.82));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .role-static-field span {
+            color: rgba(220, 233, 255, 0.88);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .role-static-field strong {
+            color: #f7fbff;
+            font-size: 0.95rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .field-meta-row {
+            margin-top: -4px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .forgot-link,
+        .inline-link {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #56c0ff;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .forgot-link {
+            font-size: 0.9rem;
+        }
+
+        .submit-button {
+            margin-top: 8px;
+            background: linear-gradient(180deg, #3f9eff, #1667dc);
+            color: #ffffff;
+            font-size: 1.04rem;
+            font-weight: 800;
+            box-shadow: 0 18px 30px rgba(14, 51, 136, 0.3);
+        }
+
+        .panel-spacer {
+            flex: 1 1 auto;
+            min-height: 150px;
+            margin-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 46%);
+        }
+
+        .auth-panel.is-signup-open .panel-spacer {
+            min-height: 30px;
+            flex: 0 0 30px;
+        }
+
+        .panel-footer {
+            margin: 18px 0 0;
+            text-align: center;
+            color: rgba(234, 241, 255, 0.92);
+            font-size: 1.04rem;
+        }
+
+        .auth-status {
+            padding: 16px 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(14, 24, 52, 0.72);
+            color: #e5f1ff;
+            text-align: center;
+            line-height: 1.55;
+            box-shadow: 0 18px 30px rgba(3, 8, 26, 0.28);
+        }
+
+        .auth-status[data-state="success"] {
+            border-color: rgba(84, 222, 156, 0.24);
+            background: rgba(12, 58, 44, 0.42);
+            color: #bbffd9;
+        }
+
+        .auth-status[data-state="error"] {
+            border-color: rgba(255, 133, 151, 0.24);
+            background: rgba(74, 16, 30, 0.46);
+            color: #ffd7df;
+        }
+
+        .auth-helper {
+            margin: 0;
+            text-align: center;
+            color: rgba(217, 228, 251, 0.8);
+            line-height: 1.55;
+        }
+
+        @media (max-width: 980px) {
+            .school-entry-band {
+                grid-template-columns: 1fr;
+            }
+
+            .school-entry-button {
+                width: 100%;
+            }
+
+            .auth-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .auth-panel {
+                min-height: auto;
+            }
+
+            .panel-spacer {
+                min-height: 54px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 14px;
+            }
+
+            .auth-panel {
+                padding: 14px;
+                border-radius: 24px;
+            }
+
+            .auth-hero {
+                height: 168px;
+            }
+
+            .hero-badge {
+                top: 18px;
+                font-size: 1.5rem;
+            }
+
+            .hero-brand {
+                top: 76px;
+                font-size: 1.2rem;
+            }
+
+            .auth-console {
+                margin: -8px 12px 0;
+                padding: 28px 20px 22px;
+            }
+
+            .console-head h1 {
+                font-size: 2rem;
+            }
+
+            .console-head p,
+            .panel-footer,
+            .auth-helper {
+                font-size: 0.96rem;
+            }
+        }
+    </style>
+</head>
+<body data-page="auth">
+    <main class="auth-page">
+        <section class="school-entry-band" aria-label="School Management quick access">
+            <div class="school-entry-copy">
+                <p class="school-entry-kicker">School Management</p>
+                <h2>Open the School Management registration page directly from the first screen.</h2>
+                <p>Use this section for DOS sign in or sign up with email and password, plus Teacher sign in with email and password only.</p>
+            </div>
+
+            <a class="action-button school-entry-button" href="./school/register.html">
+                <span class="action-icon" aria-hidden="true">🏫</span>
+                <span>Open School Management</span>
+            </a>
+        </section>
+
+        <section class="auth-grid" aria-label="Account access">
+            <article id="signup-panel" class="auth-panel" aria-labelledby="signup-title">
+                <div class="auth-panel-shell">
+                    <div class="auth-hero" aria-hidden="true">
+                        <div class="hero-side-glow"></div>
+                        <div class="hero-side-glow-right"></div>
+                        <div class="hero-badge">AI</div>
+                        <p class="hero-brand">AI BROWSER</p>
+                    </div>
+
+                    <div class="auth-console">
+                        <div class="console-head">
+                            <h1 id="signup-title">Create Account</h1>
+                            <p>Choose DOS or Teacher registration and create your account.</p>
+                        </div>
+
+                        <div class="console-actions">
+                            <button id="signup-email-toggle" class="action-button email-button" type="button" aria-expanded="false">
+                                <span class="action-icon" aria-hidden="true">✉</span>
+                                <span>Sign Up with Email</span>
+                            </button>
+
+                            <div class="action-divider" aria-hidden="true">
+                                <span>OR</span>
+                            </div>
+
+                            <button id="google-signin-button" class="action-button google-button" data-google-auth type="button">
+                                <span class="google-mark" aria-hidden="true">G</span>
+                                <span>Sign Up with Google</span>
+                            </button>
+                        </div>
+
+                        <div id="signup-form" class="signup-drawer" hidden>
+                            <div class="signup-tab-bar" role="tablist" aria-label="Registration type">
+                                <button id="signup-dos-tab" class="signup-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="signup-dos-form">DOS Registration</button>
+                                <button id="signup-teacher-tab" class="signup-tab" type="button" role="tab" aria-selected="false" aria-controls="signup-teacher-form">Teacher Registration</button>
+                            </div>
+
+                            <p id="signup-role-copy" class="signup-role-copy">DOS registration saves to Firebase Auth and the <code>dos</code> collection with role set to <code>dos</code>.</p>
+
+                            <form id="signup-dos-form" class="signup-role-form">
+                                <div class="form-group">
+                                    <span class="form-group-label">DOS Name</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">👤</span>
+                                        <input id="signup-dos-name" type="text" placeholder="DOS full name" maxlength="48" autocomplete="name">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Email</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">✉</span>
+                                        <input id="signup-dos-email" type="email" placeholder="dos@example.com" autocomplete="email">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Password</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">🔒</span>
+                                        <input id="signup-dos-password" type="password" placeholder="Minimum 6 characters" autocomplete="new-password">
+                                    </label>
+                                </div>
+
+                                <div class="role-static-field">
+                                    <span>Role</span>
+                                    <strong>dos</strong>
+                                </div>
+
+                                <button id="signup-dos-submit-button" class="submit-button" type="submit">Register DOS</button>
+                            </form>
+
+                            <form id="signup-teacher-form" class="signup-role-form" hidden>
+                                <div class="form-group">
+                                    <span class="form-group-label">Teacher Name</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">👤</span>
+                                        <input id="signup-teacher-name" type="text" placeholder="Teacher full name" maxlength="48" autocomplete="name">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Email</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">✉</span>
+                                        <input id="signup-teacher-email" type="email" placeholder="teacher@example.com" autocomplete="email">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Password</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">🔒</span>
+                                        <input id="signup-teacher-password" type="password" placeholder="Minimum 6 characters" autocomplete="new-password">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Title</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">🏷</span>
+                                        <select id="signup-teacher-title">
+                                            <option value="normal">normal</option>
+                                            <option value="class_teacher">class_teacher</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Module Name</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">📘</span>
+                                        <input id="signup-teacher-module-name" type="text" placeholder="Module / Subject name">
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Module Category</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">🧩</span>
+                                        <select id="signup-teacher-module-category">
+                                            <option value="complementary">complementary</option>
+                                            <option value="general" selected>general</option>
+                                            <option value="specific">specific</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-group-label">Class ID</span>
+                                    <label class="form-field">
+                                        <span class="form-field-icon" aria-hidden="true">🏫</span>
+                                        <input id="signup-teacher-class-id" type="text" placeholder="Class ID">
+                                    </label>
+                                </div>
+
+                                <button id="signup-teacher-submit-button" class="submit-button" type="submit">Register Teacher</button>
+                            </form>
+                        </div>
+
+                        <div class="panel-spacer" aria-hidden="true"></div>
+
+                        <p class="panel-footer">
+                            Already have an account?
+                            <button id="auth-go-login" class="inline-link" type="button">Log In</button>
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article id="login-panel" class="auth-panel" aria-labelledby="login-title">
+                <div class="auth-panel-shell">
+                    <div class="auth-hero" aria-hidden="true">
+                        <div class="hero-side-glow"></div>
+                        <div class="hero-side-glow-right"></div>
+                        <div class="hero-badge">AI</div>
+                        <p class="hero-brand">AI BROWSER</p>
+                    </div>
+
+                    <div class="auth-console">
+                        <div class="console-head">
+                            <h1 id="login-title">Login to Account</h1>
+                            <p>Access your account.</p>
+                        </div>
+
+                        <div class="console-actions">
+                            <button id="login-email-toggle" class="action-button email-button" type="button">
+                                <span class="action-icon" aria-hidden="true">✉</span>
+                                <span>Login with Email</span>
+                            </button>
+
+                            <div class="action-divider" aria-hidden="true">
+                                <span>OR</span>
+                            </div>
+
+                            <button class="action-button google-button google-button-dark" data-google-auth type="button">
+                                <span class="google-mark" aria-hidden="true">G</span>
+                                <span>Login with Google</span>
+                            </button>
+                        </div>
+
+                        <form id="login-form" class="login-form">
+                            <label class="form-field">
+                                <span class="form-field-icon" aria-hidden="true">✉</span>
+                                <input id="login-email" type="email" placeholder="Email Address" autocomplete="email">
+                            </label>
+
+                            <label class="form-field">
+                                <span class="form-field-icon" aria-hidden="true">🔒</span>
+                                <input id="login-password" type="password" placeholder="Password" autocomplete="current-password">
+                            </label>
+
+                            <div class="field-meta-row">
+                                <button id="forgot-password-button" class="forgot-link" type="button">Forgot Password?</button>
+                            </div>
+
+                            <button id="login-submit-button" class="submit-button" type="submit">Login</button>
+                        </form>
+
+                        <div class="panel-spacer" aria-hidden="true"></div>
+
+                        <p class="panel-footer">
+                            Don't have an account?
+                            <button id="auth-go-signup" class="inline-link" type="button">Sign Up</button>
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <p id="auth-status" class="auth-status" data-state="info" role="status" aria-live="polite">
+            Checking your saved session...
+        </p>
+
+        <p class="auth-helper">
+            Use DOS registration, Teacher registration, email login, or Google sign-in. Firebase will redirect authenticated users directly into the multi-tab browser workspace.
+        </p>
+    </main>
+
+    <script type="module" src="renderer.js"></script>
+</body>
+</html>

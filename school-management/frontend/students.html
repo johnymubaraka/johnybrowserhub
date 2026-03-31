@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="school.css">
+</head>
+<body class="module-page">
+    <div class="module-wrap">
+        <div class="module-header">
+            <div>
+                <h1 class="module-title">Student Management</h1>
+                <p class="module-copy">Register learners for the School Management workspace. Only name and class are required; the rest supports better report cards.</p>
+            </div>
+            <span id="student-status" class="status-banner">Loading students...</span>
+        </div>
+
+        <section class="glass-form">
+            <form id="student-form" class="form-grid">
+                <div>
+                    <label for="student-name">Student Name</label>
+                    <input id="student-name" type="text" required>
+                </div>
+                <div>
+                    <label for="student-class">Class</label>
+                    <input id="student-class" type="text" required>
+                </div>
+                <div>
+                    <label for="student-admission">Admission Number</label>
+                    <input id="student-admission" type="text">
+                </div>
+                <div>
+                    <label for="student-gender">Gender</label>
+                    <select id="student-gender">
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="student-dob">Date of Birth</label>
+                    <input id="student-dob" type="date">
+                </div>
+                <div>
+                    <label for="student-trade">Trade / Section</label>
+                    <input id="student-trade" type="text" placeholder="Optional">
+                </div>
+                <div>
+                    <button class="action-button" type="submit">Add Student</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="glass-table" style="margin-top: 18px;">
+            <div class="module-header">
+                <div>
+                    <h2 class="section-title">Registered Students</h2>
+                    <p class="table-caption">These students appear automatically in the Marks & Results module.</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Admission No</th>
+                            <th>Class</th>
+                            <th>Gender</th>
+                            <th>Trade / Section</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const studentForm = document.getElementById("student-form");
+        const studentStatus = document.getElementById("student-status");
+        const studentTableBody = document.getElementById("student-table-body");
+
+        function setStatus(message, state = "warning") {
+            studentStatus.textContent = message;
+            studentStatus.dataset.state = state;
+        }
+
+        function notifyDashboard() {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: "school-data-updated" }, "*");
+            }
+        }
+
+        function renderStudents(students) {
+            studentTableBody.innerHTML = students.map((student) => `
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.admissionNumber || "-"}</td>
+                    <td>${student.className}</td>
+                    <td>${student.gender || "-"}</td>
+                    <td>${student.tradeSection || "-"}</td>
+                    <td>${new Date(student.createdAt).toLocaleString()}</td>
+                </tr>
+            `).join("") || `
+                <tr>
+                    <td colspan="6">No students have been registered yet.</td>
+                </tr>
+            `;
+        }
+
+        async function loadStudents() {
+            try {
+                const response = await fetch("/api/students", { cache: "no-store" });
+                const payload = await response.json();
+
+                if (!response.ok || !payload.success) {
+                    throw new Error(payload.error || "Could not load students.");
+                }
+
+                renderStudents(payload.students);
+                setStatus(`Loaded ${payload.students.length} students.`, "success");
+            } catch (error) {
+                renderStudents([]);
+                setStatus(error.message || "Could not load students.", "error");
+            }
+        }
+
+        studentForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const payload = {
+                name: document.getElementById("student-name").value.trim(),
+                className: document.getElementById("student-class").value.trim(),
+                admissionNumber: document.getElementById("student-admission").value.trim(),
+                gender: document.getElementById("student-gender").value,
+                dob: document.getElementById("student-dob").value,
+                tradeSection: document.getElementById("student-trade").value.trim()
+            };
+
+            try {
+                const response = await fetch("/api/students", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.error || "Could not save student.");
+                }
+
+                studentForm.reset();
+                setStatus(`${result.student.name} added successfully.`, "success");
+                notifyDashboard();
+                loadStudents();
+            } catch (error) {
+                setStatus(error.message || "Could not save student.", "error");
+            }
+        });
+
+        loadStudents();
+    </script>
+</body>
+</html>

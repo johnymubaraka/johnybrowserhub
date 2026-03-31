@@ -1,0 +1,399 @@
+{
+  "vpnPlatforms": [
+    "Windows",
+    "macOS",
+    "Android",
+    "iPhone/iPad"
+  ],
+  "browserPlatforms": [
+    "Windows",
+    "macOS",
+    "Android",
+    "iPhone/iPad",
+    "Desktop"
+  ],
+  "vpnApps": [
+    {
+      "slug": "nordvpn",
+      "name": "NordVPN",
+      "downloadUrl": "https://nordvpn.com/download/",
+      "siteUrl": "https://nordvpn.com/",
+      "description": "High-speed VPN service with a broad server network and consumer-friendly apps.",
+      "tags": ["Security", "Streaming", "Fast"]
+    },
+    {
+      "slug": "expressvpn",
+      "name": "ExpressVPN",
+      "downloadUrl": "https://www.expressvpn.com/download",
+      "siteUrl": "https://www.expressvpn.com/",
+      "description": "Premium VPN provider known for polished apps and easy setup across devices.",
+      "tags": ["Premium", "Global", "Trusted"]
+    },
+    {
+      "slug": "surfshark",
+      "name": "Surfshark",
+      "downloadUrl": "https://surfshark.com/download",
+      "siteUrl": "https://surfshark.com/",
+      "description": "Affordable VPN app with unlimited device connections on one subscription.",
+      "tags": ["Unlimited devices", "Budget", "Privacy"]
+    },
+    {
+      "slug": "proton-vpn",
+      "name": "Proton VPN",
+      "downloadUrl": "https://protonvpn.com/download",
+      "siteUrl": "https://protonvpn.com/",
+      "description": "Privacy-first VPN from the Proton ecosystem with free and paid plans.",
+      "tags": ["Privacy", "Swiss", "Free plan"]
+    },
+    {
+      "slug": "mullvad",
+      "name": "Mullvad VPN",
+      "downloadUrl": "https://mullvad.net/en/download/vpn",
+      "siteUrl": "https://mullvad.net/",
+      "description": "Privacy-focused VPN with minimal signup friction and anonymous account numbers.",
+      "tags": ["Privacy-first", "Anonymous", "Minimal signup"]
+    },
+    {
+      "slug": "windscribe",
+      "name": "Windscribe",
+      "downloadUrl": "https://windscribe.com/download/",
+      "siteUrl": "https://windscribe.com/",
+      "description": "Flexible VPN platform with browser tools and a generous free tier.",
+      "tags": ["Free tier", "Flexible", "Browser tools"]
+    },
+    {
+      "slug": "private-internet-access",
+      "name": "Private Internet Access",
+      "downloadUrl": "https://www.privateinternetaccess.com/download",
+      "siteUrl": "https://www.privateinternetaccess.com/",
+      "description": "Long-running VPN service with many configuration options and a large network.",
+      "tags": ["Advanced", "Large network", "Customizable"]
+    },
+    {
+      "slug": "cyberghost",
+      "name": "CyberGhost",
+      "downloadUrl": "https://www.cyberghostvpn.com/download",
+      "siteUrl": "https://www.cyberghostvpn.com/",
+      "description": "Consumer VPN with streaming-friendly profiles and simple onboarding.",
+      "tags": ["Streaming", "Beginner-friendly", "Profiles"]
+    },
+    {
+      "slug": "ipvanish",
+      "name": "IPVanish",
+      "downloadUrl": "https://www.ipvanish.com/apps/",
+      "siteUrl": "https://www.ipvanish.com/",
+      "description": "VPN service with broad platform coverage and encrypted browsing features.",
+      "tags": ["Multi-platform", "Encrypted browsing", "Coverage"]
+    },
+    {
+      "slug": "vyprvpn",
+      "name": "VyprVPN",
+      "downloadUrl": "https://www.vyprvpn.com/vpn-apps",
+      "siteUrl": "https://www.vyprvpn.com/",
+      "description": "Security-focused VPN with its own infrastructure and simple apps.",
+      "tags": ["Security", "Owned infrastructure", "Apps"]
+    },
+    {
+      "slug": "purevpn",
+      "name": "PureVPN",
+      "downloadUrl": "https://www.purevpn.com/download",
+      "siteUrl": "https://www.purevpn.com/",
+      "description": "Popular VPN provider with dedicated apps for common desktop and mobile devices.",
+      "tags": ["Popular", "Desktop", "Mobile"]
+    },
+    {
+      "slug": "hide-me",
+      "name": "hide.me VPN",
+      "downloadUrl": "https://hide.me/en/download",
+      "siteUrl": "https://hide.me/en/",
+      "description": "Privacy-centered VPN with free access options and broad device support.",
+      "tags": ["Privacy", "Free option", "Device support"]
+    },
+    {
+      "slug": "hotspot-shield",
+      "name": "Hotspot Shield",
+      "downloadUrl": "https://www.hotspotshield.com/download/",
+      "siteUrl": "https://www.hotspotshield.com/",
+      "description": "Well-known VPN brand offering simple client apps for everyday users.",
+      "tags": ["Consumer", "Simple apps", "Well-known"]
+    },
+    {
+      "slug": "tunnelbear",
+      "name": "TunnelBear",
+      "downloadUrl": "https://www.tunnelbear.com/download",
+      "siteUrl": "https://www.tunnelbear.com/",
+      "description": "Friendly VPN app with an approachable experience for non-technical users.",
+      "tags": ["Beginner-friendly", "Simple", "Approachable"]
+    },
+    {
+      "slug": "norton-secure-vpn",
+      "name": "Norton Secure VPN",
+      "downloadUrl": "https://us.norton.com/products/norton-secure-vpn",
+      "siteUrl": "https://us.norton.com/",
+      "description": "VPN offering from Norton designed for users already in its security ecosystem.",
+      "tags": ["Security suite", "Consumer", "Ecosystem"]
+    },
+    {
+      "slug": "privadovpn",
+      "name": "PrivadoVPN",
+      "downloadUrl": "https://privadovpn.com/download/",
+      "siteUrl": "https://privadovpn.com/",
+      "description": "Swiss VPN provider with straightforward apps and a free option.",
+      "tags": ["Swiss", "Free option", "Straightforward"]
+    },
+    {
+      "slug": "zoogvpn",
+      "name": "ZoogVPN",
+      "downloadUrl": "https://zoogvpn.com/apps/",
+      "siteUrl": "https://zoogvpn.com/",
+      "description": "VPN platform with app downloads for major device categories.",
+      "tags": ["Apps", "Major platforms", "Consumer"]
+    },
+    {
+      "slug": "astrill",
+      "name": "Astrill VPN",
+      "downloadUrl": "https://www.astrill.com/download",
+      "siteUrl": "https://www.astrill.com/",
+      "description": "Established VPN provider used by travelers and cross-region users.",
+      "tags": ["Travel", "Cross-region", "Established"]
+    },
+    {
+      "slug": "torguard",
+      "name": "TorGuard",
+      "downloadUrl": "https://torguard.net/downloads.php",
+      "siteUrl": "https://torguard.net/",
+      "description": "VPN service with advanced features and many desktop app options.",
+      "tags": ["Advanced", "Desktop", "Features"]
+    },
+    {
+      "slug": "bitdefender-vpn",
+      "name": "Bitdefender VPN",
+      "downloadUrl": "https://www.bitdefender.com/solutions/vpn.html",
+      "siteUrl": "https://www.bitdefender.com/",
+      "description": "VPN product bundled into the Bitdefender security family.",
+      "tags": ["Security family", "Bundled", "Protection"]
+    },
+    {
+      "slug": "avast-secureline",
+      "name": "Avast SecureLine VPN",
+      "downloadUrl": "https://www.avast.com/secureline-vpn",
+      "siteUrl": "https://www.avast.com/",
+      "description": "Consumer VPN from Avast with familiar desktop and mobile experiences.",
+      "tags": ["Consumer", "Avast", "Desktop and mobile"]
+    },
+    {
+      "slug": "avg-secure-vpn",
+      "name": "AVG Secure VPN",
+      "downloadUrl": "https://www.avg.com/secure-vpn",
+      "siteUrl": "https://www.avg.com/",
+      "description": "Security vendor VPN with easy installation for mainstream devices.",
+      "tags": ["Security vendor", "Mainstream", "Easy install"]
+    },
+    {
+      "slug": "panda-dome-vpn",
+      "name": "Panda Dome VPN",
+      "downloadUrl": "https://www.pandasecurity.com/en/homeusers/solutions/vpn/",
+      "siteUrl": "https://www.pandasecurity.com/",
+      "description": "VPN within Panda's consumer protection suite for secure browsing.",
+      "tags": ["Secure browsing", "Protection suite", "Consumer"]
+    },
+    {
+      "slug": "mozilla-vpn",
+      "name": "Mozilla VPN",
+      "downloadUrl": "https://www.mozilla.org/products/vpn/",
+      "siteUrl": "https://www.mozilla.org/",
+      "description": "Mozilla-branded VPN focused on privacy-minded users and simple access.",
+      "tags": ["Mozilla", "Privacy-minded", "Simple"]
+    },
+    {
+      "slug": "adguard-vpn",
+      "name": "AdGuard VPN",
+      "downloadUrl": "https://adguard-vpn.com/en/download.html",
+      "siteUrl": "https://adguard-vpn.com/",
+      "description": "VPN companion from AdGuard built to pair with privacy and ad-blocking tools.",
+      "tags": ["Ad blocking", "Privacy", "Companion app"]
+    }
+  ],
+  "browsers": [
+    {
+      "slug": "opera-browser",
+      "name": "Opera Browser",
+      "downloadUrl": "https://www.opera.com/download",
+      "siteUrl": "https://www.opera.com/",
+      "description": "Mainstream browser with a built-in VPN feature and privacy tools.",
+      "builtInVpn": true,
+      "tags": ["Built-in VPN", "Privacy", "Mainstream"]
+    },
+    {
+      "slug": "opera-gx",
+      "name": "Opera GX",
+      "downloadUrl": "https://www.opera.com/gx",
+      "siteUrl": "https://www.opera.com/gx",
+      "description": "Gaming-focused Opera variant that also includes Opera privacy features.",
+      "builtInVpn": true,
+      "tags": ["Built-in VPN", "Gaming", "Opera family"]
+    },
+    {
+      "slug": "aloha-browser",
+      "name": "Aloha Browser",
+      "downloadUrl": "https://alohabrowser.com/",
+      "siteUrl": "https://alohabrowser.com/",
+      "description": "Mobile-first privacy browser known for its integrated VPN experience.",
+      "builtInVpn": true,
+      "tags": ["Built-in VPN", "Mobile", "Privacy"]
+    },
+    {
+      "slug": "epic-browser",
+      "name": "Epic Privacy Browser",
+      "downloadUrl": "https://www.epicbrowser.com/",
+      "siteUrl": "https://www.epicbrowser.com/",
+      "description": "Privacy-oriented browser that emphasizes tracking protection and proxy privacy.",
+      "builtInVpn": true,
+      "tags": ["Proxy privacy", "Tracking protection", "Privacy"]
+    },
+    {
+      "slug": "tor-browser",
+      "name": "Tor Browser",
+      "downloadUrl": "https://www.torproject.org/download/",
+      "siteUrl": "https://www.torproject.org/",
+      "description": "An anonymity-focused browser built for privacy-sensitive browsing sessions.",
+      "builtInVpn": false,
+      "tags": ["Privacy", "Anonymity", "Secure browsing"]
+    },
+    {
+      "slug": "brave-browser",
+      "name": "Brave Browser",
+      "downloadUrl": "https://brave.com/download/",
+      "siteUrl": "https://brave.com/",
+      "description": "Privacy-focused browser that pairs well with VPN workflows and blocks trackers by default.",
+      "builtInVpn": false,
+      "tags": ["Privacy", "Tracker blocking", "VPN-ready"]
+    },
+    {
+      "slug": "vivaldi-browser",
+      "name": "Vivaldi",
+      "downloadUrl": "https://vivaldi.com/download/",
+      "siteUrl": "https://vivaldi.com/",
+      "description": "Highly customizable browser often used by power users who add VPN workflows.",
+      "builtInVpn": false,
+      "tags": ["Customizable", "Power users", "VPN-ready"]
+    },
+    {
+      "slug": "firefox-browser",
+      "name": "Firefox",
+      "downloadUrl": "https://www.mozilla.org/firefox/new/",
+      "siteUrl": "https://www.mozilla.org/firefox/",
+      "description": "Popular browser with strong privacy controls and a natural fit for VPN users.",
+      "builtInVpn": false,
+      "tags": ["Privacy controls", "Popular", "VPN-ready"]
+    },
+    {
+      "slug": "chrome-browser",
+      "name": "Google Chrome",
+      "downloadUrl": "https://www.google.com/chrome/",
+      "siteUrl": "https://www.google.com/chrome/",
+      "description": "Widely used browser that can be combined with VPN apps and browser-based VPN tools.",
+      "builtInVpn": false,
+      "tags": ["Mainstream", "Extensions", "VPN-ready"]
+    },
+    {
+      "slug": "edge-browser",
+      "name": "Microsoft Edge",
+      "downloadUrl": "https://www.microsoft.com/edge/download",
+      "siteUrl": "https://www.microsoft.com/edge",
+      "description": "Modern Chromium-based browser suitable for VPN app users and enterprise setups.",
+      "builtInVpn": false,
+      "tags": ["Chromium", "Enterprise", "VPN-ready"]
+    },
+    {
+      "slug": "avast-secure-browser",
+      "name": "Avast Secure Browser",
+      "downloadUrl": "https://www.avast.com/secure-browser",
+      "siteUrl": "https://www.avast.com/secure-browser",
+      "description": "Security-focused browser from Avast designed around safer browsing habits.",
+      "builtInVpn": false,
+      "tags": ["Security", "Safer browsing", "Privacy"]
+    },
+    {
+      "slug": "avg-secure-browser",
+      "name": "AVG Secure Browser",
+      "downloadUrl": "https://www.avg.com/secure-browser",
+      "siteUrl": "https://www.avg.com/secure-browser",
+      "description": "Secure browsing product from AVG with privacy and protection features.",
+      "builtInVpn": false,
+      "tags": ["Security", "Protection", "Privacy"]
+    },
+    {
+      "slug": "ur-browser",
+      "name": "UR Browser",
+      "downloadUrl": "https://www.ur-browser.com/",
+      "siteUrl": "https://www.ur-browser.com/",
+      "description": "Privacy browser focused on cleaner navigation and personal data control.",
+      "builtInVpn": false,
+      "tags": ["Privacy", "Data control", "Browser"]
+    },
+    {
+      "slug": "sidekick-browser",
+      "name": "Sidekick",
+      "downloadUrl": "https://www.meetsidekick.com/",
+      "siteUrl": "https://www.meetsidekick.com/",
+      "description": "Productivity browser that some users pair with VPN apps for work isolation.",
+      "builtInVpn": false,
+      "tags": ["Productivity", "Workflows", "VPN-ready"]
+    },
+    {
+      "slug": "arc-browser",
+      "name": "Arc Browser",
+      "downloadUrl": "https://arc.net/download",
+      "siteUrl": "https://arc.net/",
+      "description": "Modern workspace-style browser that can sit alongside system VPN tools.",
+      "builtInVpn": false,
+      "tags": ["Modern", "Workspace", "VPN-ready"]
+    },
+    {
+      "slug": "waterfox-browser",
+      "name": "Waterfox",
+      "downloadUrl": "https://www.waterfox.net/download/",
+      "siteUrl": "https://www.waterfox.net/",
+      "description": "Firefox-based browser aimed at users who want more control and privacy.",
+      "builtInVpn": false,
+      "tags": ["Firefox-based", "Control", "Privacy"]
+    },
+    {
+      "slug": "librewolf-browser",
+      "name": "LibreWolf",
+      "downloadUrl": "https://librewolf.net/installation/windows/",
+      "siteUrl": "https://librewolf.net/",
+      "description": "Privacy-hardened browser based on Firefox for security-conscious users.",
+      "builtInVpn": false,
+      "tags": ["Privacy-hardened", "Security-conscious", "Firefox-based"]
+    },
+    {
+      "slug": "floorp-browser",
+      "name": "Floorp",
+      "downloadUrl": "https://floorp.app/en/download",
+      "siteUrl": "https://floorp.app/en/",
+      "description": "Firefox-based browser with customization features and a privacy-friendly stance.",
+      "builtInVpn": false,
+      "tags": ["Firefox-based", "Customization", "Privacy"]
+    },
+    {
+      "slug": "yandex-browser",
+      "name": "Yandex Browser",
+      "downloadUrl": "https://browser.yandex.com/",
+      "siteUrl": "https://browser.yandex.com/",
+      "description": "Chromium-based browser with integrated browsing utilities and mobile coverage.",
+      "builtInVpn": false,
+      "tags": ["Chromium", "Utilities", "VPN-ready"]
+    },
+    {
+      "slug": "maxthon-browser",
+      "name": "Maxthon",
+      "downloadUrl": "https://www.maxthon.com/",
+      "siteUrl": "https://www.maxthon.com/",
+      "description": "Cross-platform browser with cloud features and broad user-facing download pages.",
+      "builtInVpn": false,
+      "tags": ["Cross-platform", "Cloud", "VPN-ready"]
+    }
+  ]
+}

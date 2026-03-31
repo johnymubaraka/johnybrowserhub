@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JohnyBrowserHub School Management</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="../workspace.css">
+    <link rel="stylesheet" href="school.css">
+</head>
+<body data-page="school-dashboard" data-shell="workspace">
+    <header class="workspace-header school-header">
+        <div class="header-leading">
+            <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                <span class="menu-toggle-lines" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+            <div class="brand">
+                <img src="../assets/app-icon.svg" alt="JohnyBrowserHub icon">
+                <div class="brand-copy">
+                    <p class="brand-kicker">JohnyBrowserHub</p>
+                    <h1 class="brand-title">School Management dashboard</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="school-header-card surface-block">
+            <p class="menu-section-kicker">School Module</p>
+            <h2 class="school-header-title">Manage students, classes, teachers, modules, and report cards</h2>
+            <p class="school-header-copy">This module stays separate from the Browser Hub and AI tools while giving logged-in users role-based access to live Firebase school tools and information.</p>
+        </div>
+
+        <div class="session-card">
+            <div id="session-avatar" class="session-avatar" aria-hidden="true">🤖</div>
+            <div class="session-meta">
+                <p id="session-user" class="session-user">Loading session...</p>
+                <p id="session-email" class="session-email">Checking authentication state</p>
+            </div>
+            <button id="sign-out-button" class="ghost-danger-button" type="button">Sign out</button>
+        </div>
+    </header>
+
+    <main class="school-dashboard-page surface-panel">
+        <div class="school-dashboard-layout">
+            <aside class="school-role-sidebar">
+                <p class="menu-section-kicker">DOS Navigation</p>
+                <a class="school-role-link is-active" href="#school-access-panel">Access Control</a>
+                <a class="school-role-link" href="#school-classes-panel">Classes</a>
+                <a class="school-role-link" href="#school-students-panel">Students</a>
+                <a class="school-role-link" href="#school-modules-panel">Modules</a>
+                <a class="school-role-link" href="#school-reports-panel">Reports</a>
+                <a id="school-analytics-link" class="school-role-link" href="./analytics.html" hidden>Analytics</a>
+            </aside>
+
+            <div class="school-role-content">
+        <section class="school-hero-grid" aria-label="School Management highlights">
+            <article class="school-hero-card">
+                <span class="school-collection-badge">Live Firebase school workspace</span>
+                <h2 class="school-hero-title">Everything for school administration in one JohnyBrowserHub module.</h2>
+                <p class="school-hero-copy">Track students, classes, teachers, categorized modules, marks, and report cards in real time. Every save writes to Firestore immediately, and every report can be exported as a PDF report card.</p>
+            </article>
+
+            <div class="school-hero-stack">
+                <article class="school-stack-card">
+                    <p class="menu-section-kicker">Realtime</p>
+                    <strong>Students, teachers, classes, and reports stay synced live.</strong>
+                </article>
+                <article class="school-stack-card">
+                    <p class="menu-section-kicker">Exports</p>
+                    <strong>Generate downloadable report card PDFs directly from saved reports.</strong>
+                </article>
+            </div>
+        </section>
+
+        <section class="school-overview-grid" aria-label="School overview">
+            <article class="school-overview-card is-highlight">
+                <p class="menu-section-kicker">School</p>
+                <h2 id="school-name" class="school-overview-title">Loading school...</h2>
+                <p class="school-overview-copy">Resolved from the Firestore <code>schools</code> collection.</p>
+            </article>
+
+            <article class="school-overview-card is-highlight">
+                <p class="menu-section-kicker">Role</p>
+                <h2 id="school-role" class="school-overview-title">user</h2>
+                <p class="school-overview-copy">Your signed-in role decides which school tools and records are available here.</p>
+            </article>
+
+            <article class="school-overview-card is-highlight">
+                <p class="menu-section-kicker">School ID</p>
+                <h2 id="school-identifier" class="school-overview-title">Loading...</h2>
+                <p class="school-overview-copy">This ID links the school data collections.</p>
+            </article>
+
+            <article class="school-overview-card">
+                <p class="menu-section-kicker">Students</p>
+                <span id="school-students-count" class="school-overview-value">0</span>
+                <p class="school-overview-footnote">Active student records available in this school.</p>
+            </article>
+
+            <article class="school-overview-card">
+                <p class="menu-section-kicker">Classes</p>
+                <span id="school-classes-count" class="school-overview-value">0</span>
+                <p class="school-overview-footnote">Live class groups ready for assignment and reporting.</p>
+            </article>
+
+            <article class="school-overview-card">
+                <p class="menu-section-kicker">Teachers</p>
+                <span id="school-teachers-count" class="school-overview-value">0</span>
+                <p class="school-overview-footnote">Teaching staff linked to classes and report cards.</p>
+            </article>
+
+            <article class="school-overview-card">
+                <p class="menu-section-kicker">Reports</p>
+                <span id="school-reports-count" class="school-overview-value">0</span>
+                <p class="school-overview-footnote">Saved report cards ready to download as PDFs.</p>
+            </article>
+        </section>
+
+        <p id="school-status" class="status-banner" data-state="info" role="status" aria-live="polite">
+            Checking school access...
+        </p>
+
+        <section class="school-module-grid">
+            <section id="school-access-panel" class="school-module-panel school-module-panel-wide" aria-label="School access setup"></section>
+            <section id="school-students-panel" class="school-module-panel" aria-label="Students module"></section>
+            <section id="school-classes-panel" class="school-module-panel" aria-label="Classes module"></section>
+            <section id="school-teachers-panel" class="school-module-panel" aria-label="Teachers module"></section>
+            <section id="school-modules-panel" class="school-module-panel school-module-panel-wide" aria-label="Modules and marks module"></section>
+            <section id="school-reports-panel" class="school-module-panel school-module-panel-wide" aria-label="Reports module"></section>
+        </section>
+            </div>
+        </div>
+    </main>
+
+    <div id="menu-overlay" class="side-menu-overlay hidden"></div>
+
+    <aside id="side-menu" class="side-menu hidden" aria-hidden="true">
+        <div class="side-menu-header">
+            <h2 class="side-menu-title">Menu</h2>
+            <button id="menu-close" class="icon-button" type="button" aria-label="Close menu">x</button>
+        </div>
+
+        <div class="side-menu-body">
+            <section id="menu-home-panel" class="menu-panel">
+                <button id="menu-profile-button" class="menu-profile-card" type="button">
+                    <div id="menu-profile-avatar" class="menu-profile-avatar" aria-hidden="true">🤖</div>
+                    <div class="menu-profile-copy">
+                        <p class="menu-section-kicker">Profile</p>
+                        <h3 id="menu-profile-name" class="menu-profile-name">JohnyBrowserHub User</h3>
+                        <p class="menu-profile-caption">Update your username and built-in emoji profile photo.</p>
+                    </div>
+                </button>
+
+                <section class="menu-section">
+                    <p class="menu-section-kicker">Services</p>
+                    <h3 class="menu-section-title">Quick destinations</h3>
+                    <div class="service-list">
+                        <button id="service-ai-chat" class="service-button" type="button">
+                            AI Chat Bot
+                            <span>Open the assistant in the browser workspace.</span>
+                        </button>
+                        <button id="service-downloads" class="service-button" type="button">
+                            Download VPN and Browser
+                            <span>Go to the official downloads page.</span>
+                        </button>
+                        <button id="service-school-system" class="service-button" type="button" hidden>
+                            🏫 School Management
+                            <span>Open the shared school dashboard for this signed-in account.</span>
+                        </button>
+                        <button id="service-browser" class="service-button" type="button">
+                            Multi Tab Browser
+                            <span>Return to the main tabbed workspace.</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="menu-section">
+                    <p class="menu-section-kicker">About</p>
+                    <h3 class="menu-section-title">Learn more</h3>
+                    <div class="service-list">
+                        <button id="menu-about-button" class="service-button" type="button">
+                            About JohnyBrowserHub
+                            <span>Read the mission, developer information, features, and usage terms.</span>
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <section id="menu-profile-panel" class="menu-panel hidden">
+                <div class="profile-panel-header">
+                    <button id="profile-back-button" class="ghost-button" type="button">Back</button>
+                    <h3 class="profile-panel-title">Profile</h3>
+                </div>
+
+                <p class="profile-panel-copy">Choose an emoji profile photo, enter your username, and save it for this device.</p>
+
+                <div class="profile-editor surface-block">
+                    <div class="profile-avatar-wrap">
+                        <div id="profile-avatar-preview" class="profile-avatar-preview" aria-hidden="true">🤖</div>
+                        <div class="profile-avatar-copy">Your selected emoji appears in the menu and dashboard header.</div>
+                    </div>
+
+                    <label class="field-label" for="profile-name-input">Username</label>
+                    <input id="profile-name-input" class="field-input" type="text" maxlength="32" placeholder="Enter your username">
+
+                    <p class="field-label field-label-gap">Built-in emoji profile photos</p>
+                    <div id="profile-emoji-grid" class="emoji-grid" aria-label="Emoji profile photo options"></div>
+
+                    <div class="profile-save-row">
+                        <button id="profile-save-button" class="primary-button" type="button">Save profile</button>
+                        <p id="profile-save-note" class="profile-save-note" data-state="info">Your profile stays saved on this device.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="menu-about-panel" class="menu-panel hidden">
+                <div class="profile-panel-header">
+                    <button id="about-back-button" class="ghost-button" type="button">Back</button>
+                    <h3 class="profile-panel-title">About JohnyBrowserHub</h3>
+                </div>
+
+                <div class="about-panel surface-block">
+                    <section class="about-section">
+                        <p class="menu-section-kicker">About</p>
+                        <h4 class="about-title">📄 ABOUT JOHNYBROWSERHUB</h4>
+                        <p class="about-copy">JohnyBrowserHub is an advanced all-in-one desktop application designed to simplify and enhance how users interact with the internet and artificial intelligence.</p>
+                        <p class="about-copy">The platform combines powerful AI chat, image generation, deep research tools, and multi-browser functionality into a single, easy-to-use environment. It is built to help users work faster, explore smarter, and create more efficiently.</p>
+                        <p class="about-copy">JohnyBrowserHub integrates multiple AI systems to ensure reliability, speed, and flexibility, giving users a seamless digital experience for productivity, creativity, and everyday tasks.</p>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Developer</p>
+                        <h4 class="about-title">👤 Developer Information</h4>
+                        <div class="about-facts">
+                            <p><strong>Developed by:</strong> Umukunzi Mubaraka Johnson</p>
+                            <p><strong>Location:</strong> Kigali, Rwanda</p>
+                            <p><strong>Email:</strong> mubarakajohny@gmail.com / kanyinyatssadvantist@gmail.com</p>
+                            <p><strong>Phone:</strong> +250 785 058 182</p>
+                        </div>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Purpose</p>
+                        <h4 class="about-title">🎯 Mission</h4>
+                        <p class="about-copy">To provide a smart, reliable, and accessible platform that empowers users with advanced AI tools and seamless browsing in one unified application.</p>
+                        <h4 class="about-title about-title-gap">🚀 Vision</h4>
+                        <p class="about-copy">To become a leading AI-powered desktop solution that transforms how people interact with technology, making digital tools faster, smarter, and more accessible.</p>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </aside>
+
+    <script type="module" src="../renderer.js"></script>
+</body>
+</html>

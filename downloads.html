@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JohnyBrowserHub Downloads</title>
+    <link rel="icon" type="image/svg+xml" href="assets/app-icon.svg">
+    <link rel="stylesheet" href="workspace.css">
+</head>
+<body data-page="downloads" data-shell="workspace">
+    <header class="workspace-header downloads-header">
+        <div class="header-leading">
+            <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                <span class="menu-toggle-lines" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+            <div class="brand">
+                <img src="assets/app-icon.svg" alt="JohnyBrowserHub icon">
+                <div class="brand-copy">
+                    <p class="brand-kicker">JohnyBrowserHub</p>
+                    <h1 class="brand-title">VPN and browser downloads</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="downloads-hero-copy surface-block">
+            <p class="menu-section-kicker">Services</p>
+            <p class="downloads-hero-text">Open official download pages for major VPN apps and browsers from one place.</p>
+        </div>
+
+        <div class="session-card">
+            <div id="session-avatar" class="session-avatar" aria-hidden="true">🤖</div>
+            <div class="session-meta">
+                <p id="session-user" class="session-user">Loading session...</p>
+                <p id="session-email" class="session-email">Checking authentication state</p>
+            </div>
+            <button id="sign-out-button" class="ghost-danger-button" type="button">Sign out</button>
+        </div>
+    </header>
+
+    <main class="downloads-page surface-panel">
+        <section class="downloads-intro">
+            <p class="downloads-kicker">Download hub</p>
+            <h2 class="downloads-title">Download VPNs and browsers</h2>
+            <p class="downloads-description">Browse curated download links and official websites for desktop and mobile-friendly VPNs and browsers.</p>
+        </section>
+
+        <p id="downloads-status" class="status-banner" data-state="info" role="status" aria-live="polite">
+            Loading download recommendations...
+        </p>
+
+        <section class="downloads-section">
+            <div class="section-heading">
+                <p class="menu-section-kicker">VPN apps</p>
+                <h3 class="section-title">Popular VPN downloads</h3>
+            </div>
+            <div id="vpn-downloads" class="downloads-grid"></div>
+        </section>
+
+        <section class="downloads-section">
+            <div class="section-heading">
+                <p class="menu-section-kicker">Browsers</p>
+                <h3 class="section-title">Browser downloads</h3>
+            </div>
+            <div id="browser-downloads" class="downloads-grid"></div>
+        </section>
+    </main>
+
+    <div id="menu-overlay" class="side-menu-overlay hidden"></div>
+
+    <aside id="side-menu" class="side-menu hidden" aria-hidden="true">
+        <div class="side-menu-header">
+            <h2 class="side-menu-title">Menu</h2>
+            <button id="menu-close" class="icon-button" type="button" aria-label="Close menu">x</button>
+        </div>
+
+        <div class="side-menu-body">
+            <section id="menu-home-panel" class="menu-panel">
+                <button id="menu-profile-button" class="menu-profile-card" type="button">
+                    <div id="menu-profile-avatar" class="menu-profile-avatar" aria-hidden="true">🤖</div>
+                    <div class="menu-profile-copy">
+                        <p class="menu-section-kicker">Profile</p>
+                        <h3 id="menu-profile-name" class="menu-profile-name">JohnyBrowserHub User</h3>
+                        <p class="menu-profile-caption">Update your username and built-in emoji profile photo.</p>
+                    </div>
+                </button>
+
+                <section class="menu-section">
+                    <p class="menu-section-kicker">Services</p>
+                    <h3 class="menu-section-title">Quick destinations</h3>
+                    <div class="service-list">
+                        <button id="service-ai-chat" class="service-button" type="button">
+                            AI Chat Bot
+                            <span>Open the assistant in the browser workspace.</span>
+                        </button>
+                        <button id="service-downloads" class="service-button" type="button">
+                            Download VPN and Browser
+                            <span>Stay on the downloads page.</span>
+                        </button>
+                        <button id="service-school-system" class="service-button" type="button" hidden>
+                            🏫 School Management
+                            <span>Open the shared school dashboard for this signed-in account.</span>
+                        </button>
+                        <button id="service-browser" class="service-button" type="button">
+                            Multi Tab Browser
+                            <span>Return to the main tabbed workspace.</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="menu-section">
+                    <p class="menu-section-kicker">About</p>
+                    <h3 class="menu-section-title">Learn more</h3>
+                    <div class="service-list">
+                        <button id="menu-about-button" class="service-button" type="button">
+                            About JohnyBrowserHub
+                            <span>Read the mission, developer information, features, and usage terms.</span>
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <section id="menu-profile-panel" class="menu-panel hidden">
+                <div class="profile-panel-header">
+                    <button id="profile-back-button" class="ghost-button" type="button">Back</button>
+                    <h3 class="profile-panel-title">Profile</h3>
+                </div>
+
+                <p class="profile-panel-copy">Choose an emoji profile photo, enter your username, and save it for this device.</p>
+
+                <div class="profile-editor surface-block">
+                    <div class="profile-avatar-wrap">
+                        <div id="profile-avatar-preview" class="profile-avatar-preview" aria-hidden="true">🤖</div>
+                        <div class="profile-avatar-copy">Your selected emoji appears in the menu and header.</div>
+                    </div>
+
+                    <label class="field-label" for="profile-name-input">Username</label>
+                    <input id="profile-name-input" class="field-input" type="text" maxlength="32" placeholder="Enter your username">
+
+                    <p class="field-label field-label-gap">Built-in emoji profile photos</p>
+                    <div id="profile-emoji-grid" class="emoji-grid" aria-label="Emoji profile photo options"></div>
+
+                    <div class="profile-save-row">
+                        <div class="profile-save-actions">
+                            <button id="profile-save-button" class="primary-button" type="button">Save profile</button>
+                            <button id="profile-delete-button" class="ghost-danger-button" type="button">Delete account</button>
+                        </div>
+                        <p id="profile-save-note" class="profile-save-note" data-state="info">Your profile stays saved on this device.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="menu-about-panel" class="menu-panel hidden">
+                <div class="profile-panel-header">
+                    <button id="about-back-button" class="ghost-button" type="button">Back</button>
+                    <h3 class="profile-panel-title">About JohnyBrowserHub</h3>
+                </div>
+
+                <div class="about-panel surface-block">
+                    <section class="about-section">
+                        <p class="menu-section-kicker">About</p>
+                        <h4 class="about-title">📄 ABOUT JOHNYBROWSERHUB</h4>
+                        <p class="about-copy">JohnyBrowserHub is an advanced all-in-one desktop application designed to simplify and enhance how users interact with the internet and artificial intelligence.</p>
+                        <p class="about-copy">The platform combines powerful AI chat, image generation, deep research tools, and multi-browser functionality into a single, easy-to-use environment. It is built to help users work faster, explore smarter, and create more efficiently.</p>
+                        <p class="about-copy">JohnyBrowserHub integrates multiple AI systems to ensure reliability, speed, and flexibility, giving users a seamless digital experience for productivity, creativity, and everyday tasks.</p>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Developer</p>
+                        <h4 class="about-title">👤 Developer Information</h4>
+                        <div class="about-facts">
+                            <p><strong>Developed by:</strong> Umukunzi Mubaraka Johnson</p>
+                            <p><strong>Location:</strong> Kigali, Rwanda</p>
+                            <p><strong>Email:</strong> mubarakajohny@gmail.com / kanyinyatssadvantist@gmail.com</p>
+                            <p><strong>Phone:</strong> +250 785 058 182</p>
+                        </div>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Purpose</p>
+                        <h4 class="about-title">🎯 Mission</h4>
+                        <p class="about-copy">To provide a smart, reliable, and accessible platform that empowers users with advanced AI tools and seamless browsing in one unified application.</p>
+                        <h4 class="about-title about-title-gap">🚀 Vision</h4>
+                        <p class="about-copy">To become a leading AI-powered desktop solution that transforms how people interact with technology, making digital tools faster, smarter, and more accessible.</p>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Highlights</p>
+                        <h4 class="about-title">⚙️ Key Features</h4>
+                        <ul class="about-list">
+                            <li>🤖 AI Chat Assistant</li>
+                            <li>🖼️ Image Generation</li>
+                            <li>🌐 Multi-Browser Support</li>
+                            <li>🔍 Deep Research Tools</li>
+                            <li>📥 Downloadable Resources (VPNs &amp; Browsers)</li>
+                            <li>⚡ Fast and Modern Interface</li>
+                        </ul>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Terms</p>
+                        <h4 class="about-title">⚖️ Terms of Use &amp; Restrictions</h4>
+                        <p class="about-copy">By using JohnyBrowserHub, you agree to the following:</p>
+                        <ul class="about-list">
+                            <li>The application must be used for legal and ethical purposes only.</li>
+                            <li>Users must not use the app to generate harmful, illegal, or misleading content.</li>
+                            <li>Users must not violate privacy, security, or intellectual property rights.</li>
+                            <li>Users must not perform unauthorized access or hacking activities.</li>
+                            <li>The developer is not responsible for misuse of the application by users.</li>
+                            <li>Some features depend on third-party services, internet access, and external AI systems that may have their own limitations or terms.</li>
+                        </ul>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Privacy</p>
+                        <h4 class="about-title">🔐 Privacy Notice (Basic)</h4>
+                        <ul class="about-list">
+                            <li>JohnyBrowserHub does not intentionally collect personal data without user consent.</li>
+                            <li>Some features, including AI chat and image generation, may send data to external APIs.</li>
+                            <li>Users should avoid sharing sensitive personal information while using AI features.</li>
+                        </ul>
+                    </section>
+
+                    <section class="about-section">
+                        <p class="menu-section-kicker">Copyright</p>
+                        <h4 class="about-title">© Copyright &amp; Intellectual Property</h4>
+                        <p class="about-copy">© 2026 Umukunzi Mubaraka Johnson. All Rights Reserved.</p>
+                        <p class="about-copy">JohnyBrowserHub, including its source code, design, features, and content, is the intellectual property of Umukunzi Mubaraka Johnson.</p>
+                        <ul class="about-list">
+                            <li>Unauthorized copying, distribution, modification, or resale is strictly prohibited.</li>
+                            <li>Reverse engineering or tampering with the software is not allowed.</li>
+                            <li>All trademarks and product names used in the app belong to their respective owners.</li>
+                        </ul>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </aside>
+
+    <script type="module" src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="safariGrad" cx="50%" cy="36%" r="60%">
+      <stop offset="0" stop-color="#7dd9ff"/>
+      <stop offset="1" stop-color="#1f78ff"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="29" fill="url(#safariGrad)" stroke="#dff4ff" stroke-width="3"/>
+  <circle cx="32" cy="32" r="22" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+  <path d="M32 16v7M32 41v7M16 32h7M41 32h7M21 21l5 5M38 38l5 5M43 21l-5 5M26 38l-5 5" stroke="#e8f8ff" stroke-linecap="round" stroke-width="2"/>
+  <path d="M32 12l4 23-4 17-4-17z" fill="#f04b4b"/>
+  <path d="M32 52l-4-17 4-23 4 23z" fill="#ffffff"/>
+  <circle cx="32" cy="32" r="3" fill="#ffffff"/>
+</svg>

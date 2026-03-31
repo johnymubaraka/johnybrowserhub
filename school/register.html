@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Registration</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="school-access.css">
+    <style>
+        .school-register-shell {
+            width: min(1240px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .school-register-card {
+            min-height: auto;
+        }
+
+        .school-register-panel {
+            gap: 22px;
+        }
+
+        .school-register-title {
+            margin: 0;
+            font-size: clamp(2.1rem, 3vw, 3.1rem);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        .school-register-subtitle {
+            margin: 0;
+            color: var(--school-muted);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .school-register-hero {
+            display: grid;
+            gap: 18px;
+        }
+
+        .school-register-note {
+            padding: 18px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--school-line-soft);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .school-register-note strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--school-cyan);
+            font-size: 0.98rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .school-register-note p {
+            margin: 0;
+            color: var(--school-muted);
+            line-height: 1.7;
+        }
+
+        .school-register-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .school-register-block {
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid var(--school-line-soft);
+            background: rgba(255, 255, 255, 0.04);
+            display: grid;
+            gap: 18px;
+        }
+
+        .school-register-block h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        .school-register-block p {
+            margin: 0;
+            color: var(--school-muted);
+            line-height: 1.65;
+        }
+
+        .school-register-inline-actions {
+            display: grid;
+            gap: 12px;
+        }
+
+        .school-register-inline-actions .school-action-button,
+        .school-register-inline-actions .school-ghost-button {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .school-register-helper {
+            margin: 0;
+            color: var(--school-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1120px) {
+            .school-register-shell,
+            .school-register-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .school-register-block,
+            .school-register-note {
+                padding: 18px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="school-access-page">
+        <div class="school-access-topbar">
+            <a class="school-back-link" href="../index.html">Back to Main Login</a>
+            <div class="school-access-badge">School Management</div>
+        </div>
+
+        <section class="school-register-shell" aria-label="School Management registration page">
+            <article class="school-access-card school-register-card">
+                <div class="school-access-card-shell school-register-panel">
+                    <div class="school-access-icon-row">
+                        <div class="school-stat-grid">
+                            <div class="school-stat-chip">
+                                <strong>DOS</strong>
+                                <span>Sign In / Up</span>
+                            </div>
+                            <div class="school-stat-chip">
+                                <strong>Teacher</strong>
+                                <span>Sign In</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="school-register-hero">
+                        <h1 class="school-register-title">Registration Page</h1>
+                        <p class="school-register-subtitle">School Management starts here after the opening animation. This page only asks for email and password so DOS and Teacher can enter their pages directly.</p>
+                    </div>
+
+                    <div class="school-dos-copy-grid">
+                        <article class="school-dos-copy-card">
+                            <h3>Sign In / Sign Up As DOS</h3>
+                            <p>DOS can create a new School Management login with email and password only, or sign in with an existing DOS email and password to open the dashboard.</p>
+                        </article>
+                        <article class="school-dos-copy-card">
+                            <h3>Sign In As Teacher</h3>
+                            <p>Teacher login only requests the teacher email and password already assigned inside the school system, then opens the teacher page directly.</p>
+                        </article>
+                        <article class="school-dos-copy-card">
+                            <h3>Minimal Entry Fields</h3>
+                            <p>Email and password are only requested to enter the page. School details can be managed later from the DOS dashboard.</p>
+                        </article>
+                    </div>
+                </div>
+            </article>
+
+            <article class="school-access-card school-register-card">
+                <div class="school-access-card-shell school-register-panel">
+                    <div>
+                        <h1 class="school-register-title">School Management</h1>
+                        <p class="school-register-subtitle">Choose the path below and continue with only email and password.</p>
+                    </div>
+
+                    <div class="school-register-grid">
+                        <section class="school-register-block" aria-labelledby="school-register-dos-title">
+                            <div class="school-access-icon-row">
+                                <div class="school-stat-grid">
+                                    <div class="school-stat-chip">
+                                        <strong>DOS</strong>
+                                        <span>Dashboard</span>
+                                    </div>
+                                    <div class="school-stat-chip">
+                                        <strong>Email</strong>
+                                        <span>Password</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h2 id="school-register-dos-title">Sign In / Sign Up As DOS</h2>
+                                <p>Enter a DOS email and password to open or create the DOS page.</p>
+                            </div>
+
+                            <form id="school-register-dos-form" class="school-form-stack">
+                                <label class="school-form-field">
+                                    <span class="school-form-icon" aria-hidden="true">✉</span>
+                                    <input id="school-register-dos-email" type="email" placeholder="DOS email" autocomplete="email" required>
+                                </label>
+                                <label class="school-form-field">
+                                    <span class="school-form-icon" aria-hidden="true">🔐</span>
+                                    <input id="school-register-dos-password" type="password" placeholder="DOS password" autocomplete="current-password" required>
+                                </label>
+
+                                <div class="school-register-inline-actions">
+                                    <button id="school-register-dos-signin" class="school-action-button is-dos" type="submit">Sign In As DOS</button>
+                                    <button id="school-register-dos-signup" class="school-ghost-button" type="button">Sign Up As DOS</button>
+                                </div>
+                            </form>
+
+                            <p class="school-register-helper">Use sign up the first time. After that, sign in with the same DOS email and password.</p>
+                        </section>
+
+                        <section class="school-register-block" aria-labelledby="school-register-teacher-title">
+                            <div class="school-access-icon-row">
+                                <div class="school-stat-grid">
+                                    <div class="school-stat-chip">
+                                        <strong>Teacher</strong>
+                                        <span>Portal</span>
+                                    </div>
+                                    <div class="school-stat-chip">
+                                        <strong>Email</strong>
+                                        <span>Password</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h2 id="school-register-teacher-title">Sign In As Teacher</h2>
+                                <p>Enter the teacher email and password only to open the teacher page.</p>
+                            </div>
+
+                            <form id="school-register-teacher-form" class="school-form-stack">
+                                <label class="school-form-field">
+                                    <span class="school-form-icon" aria-hidden="true">✉</span>
+                                    <input id="school-register-teacher-email" type="email" placeholder="Teacher email" autocomplete="email" required>
+                                </label>
+                                <label class="school-form-field">
+                                    <span class="school-form-icon" aria-hidden="true">🔐</span>
+                                    <input id="school-register-teacher-password" type="password" placeholder="Teacher password" autocomplete="current-password" required>
+                                </label>
+
+                                <button id="school-register-teacher-signin" class="school-action-button" type="submit">Sign In As Teacher</button>
+                            </form>
+
+                            <p class="school-register-helper">Teacher email and password are only used to enter the assigned teacher page.</p>
+                        </section>
+                    </div>
+
+                    <div class="school-register-note">
+                        <strong>Requested Structure</strong>
+                        <p>Opening animation to registration page, then School Management with DOS sign in / sign up by email and password, plus Teacher sign in by email and password only.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <p id="school-register-status" class="school-status-banner" data-state="info" role="status" aria-live="polite">
+            Preparing School Management registration page...
+        </p>
+    </main>
+
+    <script type="module" src="register.js"></script>
+</body>
+</html>

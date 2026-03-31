@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Analytics Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="../workspace.css">
+    <link rel="stylesheet" href="school.css">
+</head>
+<body>
+    <header class="workspace-header school-header">
+        <div class="header-leading">
+            <a class="ghost-button" href="./dashboard.html">Back to DOS Dashboard</a>
+
+            <div class="brand">
+                <img src="../assets/app-icon.svg" alt="JohnyBrowserHub icon">
+                <div class="brand-copy">
+                    <p class="brand-kicker">JohnyBrowserHub</p>
+                    <h1 class="brand-title">School Analytics dashboard</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="school-header-card surface-block">
+            <p class="menu-section-kicker">School Analytics</p>
+            <h2 class="school-header-title">Track school totals, class performance, module performance, rankings, and hardest subjects.</h2>
+            <p id="school-analytics-header-copy" class="school-header-copy">Loading analytics context for this DOS account...</p>
+        </div>
+
+        <div class="session-card">
+            <div id="school-analytics-session-avatar" class="session-avatar" aria-hidden="true">D</div>
+            <div class="session-meta">
+                <p id="school-analytics-session-user" class="session-user">Loading session...</p>
+                <p id="school-analytics-session-email" class="session-email">Checking analytics access</p>
+            </div>
+            <button id="school-analytics-sign-out" class="ghost-danger-button" type="button">Sign out</button>
+        </div>
+    </header>
+
+    <main class="school-dashboard-page surface-panel">
+        <div class="school-dashboard-layout">
+            <aside class="school-role-sidebar">
+                <p class="menu-section-kicker">DOS Navigation</p>
+                <a class="school-role-link" href="./dashboard.html#school-access-panel">Access Control</a>
+                <a class="school-role-link" href="./dashboard.html#school-classes-panel">Classes</a>
+                <a class="school-role-link" href="./dashboard.html#school-students-panel">Students</a>
+                <a class="school-role-link" href="./dashboard.html#school-modules-panel">Modules</a>
+                <a class="school-role-link" href="./dashboard.html#school-reports-panel">Reports</a>
+                <a class="school-role-link is-active" href="./analytics.html">Analytics</a>
+            </aside>
+
+            <div class="school-role-content">
+                <section class="school-hero-grid" aria-label="School analytics overview">
+                    <article class="school-hero-card">
+                        <span class="school-collection-badge">DOS only analytics</span>
+                        <h2 class="school-hero-title">School-wide analytics from students, classes, users, modules, marks, and reports.</h2>
+                        <p id="school-analytics-school-copy" class="school-hero-copy">Loading the selected school and analytics filters...</p>
+                    </article>
+
+                    <div class="school-hero-stack">
+                        <article class="school-stack-card">
+                            <p class="menu-section-kicker">Hardest Subject</p>
+                            <strong id="school-analytics-hardest-subject-name">Loading...</strong>
+                            <p id="school-analytics-hardest-subject-copy" class="school-overview-footnote">Checking module performance...</p>
+                        </article>
+                        <article class="school-stack-card">
+                            <p class="menu-section-kicker">Class Selection</p>
+                            <strong id="school-analytics-selection-count">Loading...</strong>
+                            <p id="school-analytics-selection-copy" class="school-overview-footnote">Preparing class analytics filters...</p>
+                        </article>
+                    </div>
+                </section>
+
+                <p id="school-analytics-status" class="status-banner" data-state="info" role="status" aria-live="polite">
+                    Checking DOS analytics access...
+                </p>
+
+                <section class="school-analytics-panel school-analytics-panel-wide" aria-labelledby="school-analytics-export-title">
+                    <div class="school-panel-head">
+                        <div>
+                            <p class="menu-section-kicker">Export</p>
+                            <h3 id="school-analytics-export-title" class="school-panel-title">Download analytics results</h3>
+                            <p class="school-panel-copy">Generate analytics-only result sheets in the same structured performance-list style, or export the current dashboard data as CSV.</p>
+                        </div>
+
+                        <div class="school-analytics-export-actions">
+                            <button id="school-analytics-download-pdf" class="primary-button" type="button" disabled>Download PDF</button>
+                            <button id="school-analytics-download-csv" class="ghost-button" type="button" disabled>Download CSV</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="school-overview-grid" aria-label="Analytics totals">
+                    <article class="school-overview-card">
+                        <p class="menu-section-kicker">Total Students</p>
+                        <span id="school-analytics-total-students" class="school-overview-value">0</span>
+                        <p class="school-overview-footnote">All students in this school.</p>
+                    </article>
+
+                    <article class="school-overview-card">
+                        <p class="menu-section-kicker">Total Classes</p>
+                        <span id="school-analytics-total-classes" class="school-overview-value">0</span>
+                        <p class="school-overview-footnote">All classes linked to this school.</p>
+                    </article>
+
+                    <article class="school-overview-card">
+                        <p class="menu-section-kicker">Total Teachers</p>
+                        <span id="school-analytics-total-teachers" class="school-overview-value">0</span>
+                        <p class="school-overview-footnote">Teacher users with role = teacher.</p>
+                    </article>
+
+                    <article class="school-overview-card">
+                        <p class="menu-section-kicker">Total Modules</p>
+                        <span id="school-analytics-total-modules" class="school-overview-value">0</span>
+                        <p class="school-overview-footnote">All learning modules for this school.</p>
+                    </article>
+                </section>
+
+                <section class="school-analytics-panel school-analytics-panel-wide" aria-labelledby="school-analytics-filter-title">
+                    <div class="school-panel-head">
+                        <div>
+                            <p class="menu-section-kicker">Analytics Filter</p>
+                            <h3 id="school-analytics-filter-title" class="school-panel-title">Class selection</h3>
+                            <p class="school-panel-copy">Tick or untick classes to include them in the analytics charts and ranking tables.</p>
+                        </div>
+                    </div>
+
+                    <div id="school-analytics-class-filters" class="school-analytics-filter-list"></div>
+                </section>
+
+                <section class="school-analytics-grid" aria-label="Analytics charts and rankings">
+                    <section class="school-analytics-panel" aria-labelledby="school-analytics-class-performance-title">
+                        <div class="school-panel-head">
+                            <div>
+                                <p class="menu-section-kicker">Performance</p>
+                                <h3 id="school-analytics-class-performance-title" class="school-panel-title">Class performance</h3>
+                                <p class="school-panel-copy">Average percentage for each class based on marks from students assigned to that class.</p>
+                            </div>
+                        </div>
+
+                        <div id="school-analytics-class-chart" class="school-chart-stack"></div>
+                    </section>
+
+                    <section class="school-analytics-panel" aria-labelledby="school-analytics-module-performance-title">
+                        <div class="school-panel-head">
+                            <div>
+                                <p class="menu-section-kicker">Performance</p>
+                                <h3 id="school-analytics-module-performance-title" class="school-panel-title">Module performance</h3>
+                                <p class="school-panel-copy">Average percentage for each module based on stored marks.</p>
+                            </div>
+                        </div>
+
+                        <div id="school-analytics-module-chart" class="school-chart-stack"></div>
+                    </section>
+
+                    <section class="school-analytics-panel school-analytics-panel-wide" aria-labelledby="school-analytics-top-students-title">
+                        <div class="school-panel-head">
+                            <div>
+                                <p class="menu-section-kicker">Ranking</p>
+                                <h3 id="school-analytics-top-students-title" class="school-panel-title">Top students</h3>
+                                <p class="school-panel-copy">Top 5 students sorted by total marks from the reports collection.</p>
+                            </div>
+                        </div>
+
+                        <div class="school-ranking-table-wrap">
+                            <table class="school-ranking-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Student</th>
+                                        <th>Class</th>
+                                        <th>Total Marks</th>
+                                        <th>Percentage</th>
+                                        <th>Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="school-analytics-top-students-body"></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="analytics.js"></script>
+</body>
+</html>

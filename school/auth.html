@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Access</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="school-access.css">
+</head>
+<body>
+    <main class="school-access-page">
+        <div class="school-access-topbar">
+            <a class="school-back-link" href="../browser.html">Back to Browser</a>
+            <div class="school-access-badge">School Management Access</div>
+        </div>
+
+        <section class="school-access-layout" aria-label="School Management access">
+            <div class="school-access-center-badge" aria-hidden="true">
+                <div class="school-access-center-copy">
+                    <div>Johny</div>
+                    <span>School Hub</span>
+                </div>
+            </div>
+
+            <article class="school-access-card">
+                <div class="school-access-card-shell">
+                    <div class="school-access-icon-row">
+                        <div class="school-stat-grid">
+                            <div class="school-stat-chip">
+                                <strong>Teacher</strong>
+                                <span>Portal</span>
+                            </div>
+                            <div class="school-stat-chip">
+                                <strong>Marks</strong>
+                                <span>Upload</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1>Teacher Sign-In</h1>
+                    <p class="school-access-copy">Open the teacher login page to authenticate with your email and DOS access code, then enter assignments and send marks to DOS.</p>
+
+                    <div class="school-dos-copy-grid">
+                        <article class="school-dos-copy-card">
+                            <h3>Assigned Module</h3>
+                            <p>Teachers only see the module and class assigned to them by DOS inside the School Management system.</p>
+                        </article>
+                        <article class="school-dos-copy-card">
+                            <h3>Assignments</h3>
+                            <p>Create formative and comprehensive assignments, enter marks for each student, and submit them directly to DOS.</p>
+                        </article>
+                    </div>
+
+                    <div style="margin-top: auto;"></div>
+
+                    <button id="school-open-teacher-login" class="school-action-button" type="button">
+                        Sign In As Teacher
+                    </button>
+                </div>
+            </article>
+
+            <article class="school-access-card dos-card">
+                <div class="school-access-card-shell">
+                    <div class="school-access-icon-row">
+                        <div class="school-stat-grid">
+                            <div class="school-stat-chip">
+                                <strong>DOS</strong>
+                                <span>Setup</span>
+                            </div>
+                            <div class="school-stat-chip">
+                                <strong>Reports</strong>
+                                <span>CAMIS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1>DOS Sign In</h1>
+                    <p class="school-access-copy">Open the DOS login page to authenticate with your email and access code, manage the whole school workspace, monitor marks, and generate report cards automatically.</p>
+
+                    <div class="school-dos-copy-grid">
+                        <article class="school-dos-copy-card">
+                            <h3>Teacher Setup</h3>
+                            <p>Add teacher email, DOS password, module or subject, trade, level, and title, then link each teacher to the correct class.</p>
+                        </article>
+                        <article class="school-dos-copy-card">
+                            <h3>Class & Student Setup</h3>
+                            <p>Create classes with trade, level, class, and sector, then fill the trainee list with name, trainee code, class, level, and sector.</p>
+                        </article>
+                        <article class="school-dos-copy-card">
+                            <h3>Mark Collection</h3>
+                            <p>Teachers send assignment marks to DOS by module. DOS can review module uploads and generate combined report cards with automatic positions.</p>
+                        </article>
+                    </div>
+
+                    <div style="margin-top: auto;"></div>
+
+                    <button id="school-open-dos-login" class="school-action-button is-dos" type="button">
+                        Sign In As DOS
+                    </button>
+                </div>
+            </article>
+        </section>
+
+        <p id="school-access-status" class="school-status-banner" data-state="info" role="status" aria-live="polite">
+            Checking your JohnyBrowserHub session for School Management access...
+        </p>
+    </main>
+
+    <script type="module" src="school-access.js"></script>
+</body>
+</html>

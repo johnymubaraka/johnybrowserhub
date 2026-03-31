@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="braveGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff7f37"/>
+      <stop offset="1" stop-color="#ff4f1e"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 4l15 4 8 10-5 26-18 16L14 44 9 18l8-10z" fill="url(#braveGrad)"/>
+  <path d="M20 21l4-7h16l4 7-2 17-10 8-10-8z" fill="#ffffff"/>
+  <path d="M24 25l4-4h8l4 4-2 9-6 5-6-5z" fill="#ff7a2e"/>
+  <path d="M27 28h10M29 33h6" stroke="#ffffff" stroke-linecap="round" stroke-width="2.5"/>
+</svg>

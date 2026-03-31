@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Dashboard</title>
+    <link rel="stylesheet" href="school.css">
+</head>
+<body>
+    <div class="glass-shell">
+        <aside class="glass-card sidebar">
+            <div>
+                <span class="pill">JohnyBrowserHub Pro</span>
+                <h1 class="brand-title">School Management</h1>
+                <p class="brand-copy">Isolated school admin workspace with students, marks entry, and official PDF report cards.</p>
+            </div>
+
+            <button class="menu-button is-active" data-frame-target="students.html">Student Management</button>
+            <button class="menu-button" data-frame-target="results.html">Marks & Results</button>
+
+            <div class="glass-card status-card">
+                <h3 class="section-title">Server Status</h3>
+                <p id="server-status" class="status-banner" data-state="warning">Checking School Management backend...</p>
+            </div>
+
+            <div class="glass-card status-card">
+                <h3 class="section-title">Integration Note</h3>
+                <p class="helper-text">Point the existing School Management button or route to <strong>/schoolDashboard.html</strong>. This page handles the rest internally.</p>
+            </div>
+        </aside>
+
+        <main class="main-panel">
+            <section class="hero-row">
+                <article class="glass-card hero-card">
+                    <span class="pill">School Admin Dashboard</span>
+                    <h2 class="hero-title">Manage school operations without touching the Browser or AI tools.</h2>
+                    <p class="hero-copy">Use the Student Management page to register learners and the Marks & Results page to enter marks, auto-calculate totals and grades, and generate official PDF report cards.</p>
+                </article>
+
+                <article class="glass-card hero-card">
+                    <h3 class="section-title">Latest Report</h3>
+                    <p id="latest-report" class="status-banner">No reports generated yet.</p>
+                </article>
+            </section>
+
+            <section class="stat-grid">
+                <article class="glass-card stat-card">
+                    <span class="stat-label">Students</span>
+                    <h3 id="student-count" class="stat-value">0</h3>
+                    <p class="stat-copy">Registered learner profiles</p>
+                </article>
+                <article class="glass-card stat-card">
+                    <span class="stat-label">Classes</span>
+                    <h3 id="class-count" class="stat-value">0</h3>
+                    <p class="stat-copy">Unique active classes</p>
+                </article>
+                <article class="glass-card stat-card">
+                    <span class="stat-label">Reports</span>
+                    <h3 id="report-count" class="stat-value">0</h3>
+                    <p class="stat-copy">Saved report card records</p>
+                </article>
+                <article class="glass-card stat-card">
+                    <span class="stat-label">Open Module</span>
+                    <h3 class="stat-value">Live</h3>
+                    <p class="stat-copy">School backend connected</p>
+                </article>
+            </section>
+
+            <iframe id="module-frame" class="content-frame" src="students.html" title="School Management Module"></iframe>
+        </main>
+    </div>
+
+    <script>
+        const moduleFrame = document.getElementById("module-frame");
+        const menuButtons = Array.from(document.querySelectorAll("[data-frame-target]"));
+        const serverStatus = document.getElementById("server-status");
+        const studentCount = document.getElementById("student-count");
+        const classCount = document.getElementById("class-count");
+        const reportCount = document.getElementById("report-count");
+        const latestReport = document.getElementById("latest-report");
+
+        function setActiveButton(target) {
+            menuButtons.forEach((button) => {
+                button.classList.toggle("is-active", button.dataset.frameTarget === target);
+            });
+        }
+
+        async function loadSummary() {
+            try {
+                const response = await fetch("/api/dashboard", { cache: "no-store" });
+                const payload = await response.json();
+
+                if (!response.ok || !payload.success) {
+                    throw new Error(payload.error || "Dashboard summary failed.");
+                }
+
+                studentCount.textContent = payload.summary.students;
+                classCount.textContent = payload.summary.classes;
+                reportCount.textContent = payload.summary.reports;
+                serverStatus.dataset.state = "success";
+                serverStatus.textContent = "School Management backend is online.";
+                latestReport.textContent = payload.summary.latestReport
+                    ? `${payload.summary.latestReport.studentName} • ${payload.summary.latestReport.className} • ${payload.summary.latestReport.term}`
+                    : "No reports generated yet.";
+            } catch (error) {
+                serverStatus.dataset.state = "error";
+                serverStatus.textContent = error.message || "School backend unavailable.";
+            }
+        }
+
+        menuButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                moduleFrame.src = button.dataset.frameTarget;
+                setActiveButton(button.dataset.frameTarget);
+            });
+        });
+
+        window.addEventListener("message", (event) => {
+            if (event.data?.type === "school-data-updated") {
+                loadSummary();
+            }
+        });
+
+        loadSummary();
+    </script>
+</body>
+</html>

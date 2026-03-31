@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="school-access.css">
+</head>
+<body data-role-login="teacher">
+    <main class="school-access-page">
+        <div class="school-access-topbar">
+            <a class="school-back-link" href="../index.html">Back to Main Login</a>
+            <div class="school-access-badge">Teacher Login</div>
+        </div>
+
+        <section class="school-login-shell" aria-label="Teacher login">
+            <article class="school-access-card school-login-card">
+                <div class="school-access-card-shell">
+                    <div class="school-access-icon-row">
+                        <div class="school-stat-grid">
+                            <div class="school-stat-chip">
+                                <strong>Teacher</strong>
+                                <span>Portal</span>
+                            </div>
+                            <div class="school-stat-chip">
+                                <strong>Module</strong>
+                                <span>Marks</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1>Login As Teacher</h1>
+                    <p class="school-access-copy">Sign in with your teacher email and password. After login you will go straight into your teacher page with the assigned module, class, assignments, and marks tools.</p>
+
+                    <form id="school-role-login-form" class="school-form-stack">
+                        <label class="school-form-field">
+                            <span class="school-form-icon" aria-hidden="true">✉</span>
+                            <input id="school-role-email" type="email" placeholder="Teacher email" autocomplete="email" required>
+                        </label>
+                        <label class="school-form-field">
+                            <span class="school-form-icon" aria-hidden="true">🔐</span>
+                            <input id="school-role-access-code" type="password" placeholder="Teacher password" autocomplete="current-password" required>
+                        </label>
+
+                        <button id="school-role-submit" class="school-action-button" type="submit">
+                            Open Teacher Dashboard
+                        </button>
+                    </form>
+                </div>
+            </article>
+        </section>
+
+        <p id="school-role-status" class="school-status-banner" data-state="info" role="status" aria-live="polite">
+            Preparing teacher login...
+        </p>
+    </main>
+
+    <script type="module" src="role-login.js"></script>
+</body>
+</html>

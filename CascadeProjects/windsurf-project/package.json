@@ -1,0 +1,21 @@
+{
+  "name": "johnybrowserhub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File .\\open-app.ps1",
+    "open": "powershell -ExecutionPolicy Bypass -File .\\open-app.ps1",
+    "set-openai-key": "powershell -ExecutionPolicy Bypass -File .\\set-openai-key.ps1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^25.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "firebase": "^12.11.0",
+    "openai": "^6.33.0"
+  }
+}

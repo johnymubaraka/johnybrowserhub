@@ -1,0 +1,6 @@
+2026/03/27-16:43:58.627 4c08 Creating DB C:\Users\Admin\OneDrive\Desktop\johnybrowserhub\data\electron-runtime\session-data\IndexedDB\http_localhost_57366.indexeddb.leveldb since it was missing.
+2026/03/27-16:43:58.632 4c08 Reusing MANIFEST C:\Users\Admin\OneDrive\Desktop\johnybrowserhub\data\electron-runtime\session-data\IndexedDB\http_localhost_57366.indexeddb.leveldb/MANIFEST-000001
+2026/03/27-16:43:58.645 7e00 Level-0 table #5: started
+2026/03/27-16:43:58.647 7e00 Level-0 table #5: 1197 bytes OK
+2026/03/27-16:43:58.649 7e00 Delete type=0 #3
+2026/03/27-16:43:58.650 7e00 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)

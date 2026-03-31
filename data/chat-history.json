@@ -1,0 +1,34 @@
+{
+  "sessions": {
+    "chat-1774620061483-q1q0ap": {
+      "updatedAt": 1774620075917,
+      "prompt": "hey",
+      "history": [
+        {
+          "id": "msg-1774620073643-user",
+          "role": "user",
+          "content": "hey",
+          "attachments": [],
+          "createdAt": 1774620073643
+        },
+        {
+          "id": "msg-1774620074006-assistant",
+          "role": "assistant",
+          "content": "",
+          "createdAt": 1774620074006,
+          "references": []
+        }
+      ]
+    },
+    "download-page-chatbot": {
+      "updatedAt": 1774633947271,
+      "prompt": "hey",
+      "history": [
+        {
+          "role": "user",
+          "content": "hey"
+        }
+      ]
+    }
+  }
+}

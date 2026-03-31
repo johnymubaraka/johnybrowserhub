@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Marks Workspace</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/app-icon.svg">
+    <link rel="stylesheet" href="school-access.css">
+</head>
+<body>
+    <main class="school-access-page">
+        <section class="school-portal-shell">
+            <div class="school-access-topbar">
+                <div class="teacher-app-topbar-leading">
+                    <button id="teacher-app-menu-toggle" class="teacher-app-menu-toggle" type="button" aria-label="Open app menu" aria-expanded="false">
+                        <span class="teacher-app-menu-toggle-lines" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
+                    <a class="school-back-link" href="./register.html">Back to School Management</a>
+                </div>
+                <div class="school-access-badge">Teacher Marks Workspace</div>
+            </div>
+
+            <section class="school-portal-panel">
+                <div class="school-portal-header">
+                    <div>
+                        <p class="school-access-copy" style="text-transform: uppercase; letter-spacing: 0.08em;">Teacher Portal</p>
+                        <h1 class="school-portal-title">Send class marks to DOS</h1>
+                        <p id="teacher-portal-copy" class="school-portal-copy">Loading your teacher assignment, class, and DOS-linked module information...</p>
+                    </div>
+                    <button id="teacher-portal-sign-out" class="school-ghost-button" type="button">Exit Teacher Portal</button>
+                </div>
+            </section>
+
+            <section class="school-portal-body">
+                <aside class="school-role-sidebar">
+                    <p class="menu-section-kicker">Teacher Navigation</p>
+                    <a class="school-role-link is-active" href="#teacher-module-section">Module</a>
+                    <a class="school-role-link" href="#teacher-assignment-section">Assignments</a>
+                    <a class="school-role-link" href="#teacher-marks-section">Marks Entry</a>
+                </aside>
+
+                <div class="school-role-content">
+                    <section id="teacher-module-section" class="school-portal-grid" aria-label="Teacher overview">
+                        <article class="school-portal-metric">
+                            <span>Teacher</span>
+                            <strong id="teacher-portal-teacher-name">Loading...</strong>
+                        </article>
+                        <article class="school-portal-metric">
+                            <span>Module</span>
+                            <strong id="teacher-portal-module-name">Loading...</strong>
+                        </article>
+                        <article class="school-portal-metric">
+                            <span>Category</span>
+                            <strong id="teacher-portal-module-category">Loading...</strong>
+                        </article>
+                        <article class="school-portal-metric">
+                            <span>Class</span>
+                            <strong id="teacher-portal-class-name">Loading...</strong>
+                        </article>
+                        <article class="school-portal-metric">
+                            <span>Trade / Level</span>
+                            <strong id="teacher-portal-trade-level">Loading...</strong>
+                        </article>
+                        <article class="school-portal-metric">
+                            <span>Term</span>
+                            <strong id="teacher-portal-term-number">Term 1</strong>
+                        </article>
+                    </section>
+
+                    <p id="teacher-portal-status" class="school-status-banner" data-state="info" role="status" aria-live="polite">
+                        Checking your teacher session...
+                    </p>
+
+                    <section id="teacher-assignment-section" class="school-portal-panel">
+                        <div class="school-portal-toolbar">
+                            <label class="school-marks-control">
+                                <span class="school-access-copy" style="text-transform: uppercase; letter-spacing: 0.08em;">Module Name</span>
+                                <select id="teacher-module-select" class="school-portal-select">
+                                    <option value="">Loading modules...</option>
+                                </select>
+                            </label>
+                            <label class="school-marks-control">
+                                <span class="school-access-copy" style="text-transform: uppercase; letter-spacing: 0.08em;">Term Number</span>
+                                <select id="teacher-term-select" class="school-portal-select">
+                                    <option value="Term 1">Term 1</option>
+                                    <option value="Term 2">Term 2</option>
+                                    <option value="Term 3">Term 3</option>
+                                    <option value="Annual">Annual</option>
+                                </select>
+                            </label>
+                            <button id="teacher-add-assignment" class="school-ghost-button" type="button">Create Assignment</button>
+                            <button id="teacher-send-marks" class="school-action-button" type="button">Submit To DOS</button>
+                        </div>
+
+                        <div class="school-tab-row" style="margin-top: 18px;">
+                            <button id="teacher-formative-button" class="school-segment-button is-active" type="button">Formative Assignment</button>
+                            <button id="teacher-comprehensive-button" class="school-segment-button" type="button">Comprehensive Assignment</button>
+                        </div>
+
+                        <div id="teacher-assignment-summary" class="school-record" style="margin-top: 18px; padding: 14px;">
+                            <p class="school-record-summary">Module: Loading... | Category: Loading... | Term: Term 1 | Assessment: Formative</p>
+                        </div>
+                    </section>
+
+                    <section id="teacher-marks-section" class="school-portal-panel">
+                        <div id="teacher-assignment-stack" class="school-assignment-stack"></div>
+                    </section>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="teacher-app-menu-overlay" class="teacher-app-menu-overlay hidden"></div>
+
+    <aside id="teacher-app-menu" class="teacher-app-menu hidden" aria-hidden="true">
+        <div class="teacher-app-menu-header">
+            <div>
+                <p class="menu-section-kicker">Teacher Menu</p>
+                <h2 class="teacher-app-menu-title">App Features</h2>
+            </div>
+            <button id="teacher-app-menu-close" class="school-ghost-button" type="button">Close</button>
+        </div>
+
+        <div class="teacher-app-menu-body">
+            <div class="teacher-app-service-list">
+                <button id="teacher-open-browser" class="teacher-app-service-button" type="button">
+                    <strong>Multi Tab Browser</strong>
+                    <span>Open the main browser workspace.</span>
+                </button>
+                <button id="teacher-open-ai-chat" class="teacher-app-service-button" type="button">
+                    <strong>AI Chat Bot</strong>
+                    <span>Open the browser workspace and use the app chat assistant.</span>
+                </button>
+                <button id="teacher-open-downloads" class="teacher-app-service-button" type="button">
+                    <strong>Download VPN and Browser</strong>
+                    <span>Go to the downloads page for browsers and VPN tools.</span>
+                </button>
+                <button id="teacher-open-school-management" class="teacher-app-service-button" type="button">
+                    <strong>School Management</strong>
+                    <span>Return to the School Management entry page.</span>
+                </button>
+                <button id="teacher-open-main-login" class="teacher-app-service-button" type="button">
+                    <strong>Main Login</strong>
+                    <span>Go back to the first app screen.</span>
+                </button>
+            </div>
+
+            <p class="teacher-app-menu-note">The teacher portal stays open here. Some app-wide pages may still ask for the main app sign-in before they fully load.</p>
+        </div>
+    </aside>
+
+    <script type="module" src="teacher-portal.js"></script>
+</body>
+</html>

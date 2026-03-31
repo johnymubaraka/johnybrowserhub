@@ -1,0 +1,884 @@
+:root {
+    color-scheme: dark;
+    --school-bg: #041224;
+    --school-bg-soft: #081a35;
+    --school-panel: rgba(14, 26, 53, 0.82);
+    --school-panel-strong: rgba(10, 24, 50, 0.92);
+    --school-line: rgba(126, 214, 255, 0.3);
+    --school-line-soft: rgba(126, 214, 255, 0.16);
+    --school-text: #ecf7ff;
+    --school-muted: rgba(217, 236, 255, 0.76);
+    --school-glow: rgba(88, 230, 255, 0.34);
+    --school-cyan: #84efff;
+    --school-cyan-strong: #65ddff;
+    --school-purple: #a985ff;
+    --school-teal: #74ffd6;
+    --school-danger: #ffb2c2;
+    --school-shadow: 0 32px 88px rgba(0, 0, 0, 0.52);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: "Aptos", "Segoe UI", sans-serif;
+    color: var(--school-text);
+    background:
+        radial-gradient(circle at 12% 24%, rgba(82, 177, 255, 0.14), transparent 18%),
+        radial-gradient(circle at 84% 24%, rgba(146, 111, 255, 0.18), transparent 20%),
+        radial-gradient(circle at 20% 82%, rgba(70, 222, 226, 0.15), transparent 18%),
+        radial-gradient(circle at 88% 72%, rgba(94, 146, 255, 0.14), transparent 22%),
+        linear-gradient(180deg, #021021 0%, #041529 38%, #03111f 100%);
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+body::before {
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(114, 224, 255, 0.05) 24%, transparent 48%, rgba(111, 157, 255, 0.05) 72%, transparent 100%),
+        linear-gradient(180deg, transparent 0%, rgba(114, 224, 255, 0.05) 20%, transparent 42%, rgba(111, 157, 255, 0.05) 74%, transparent 100%);
+    opacity: 0.7;
+}
+
+body::after {
+    background:
+        radial-gradient(circle at 50% 16%, rgba(124, 244, 255, 0.18), transparent 16%),
+        radial-gradient(circle at 50% 16%, rgba(124, 244, 255, 0.08), transparent 28%);
+}
+
+.school-access-page {
+    min-height: 100vh;
+    padding: 28px;
+    display: grid;
+    gap: 18px;
+    align-content: center;
+}
+
+.school-access-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.teacher-app-topbar-leading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.school-back-link,
+.school-inline-link,
+.school-action-button,
+.school-ghost-button {
+    font: inherit;
+}
+
+.teacher-app-menu-toggle {
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border-radius: 16px;
+    border: 1px solid var(--school-line);
+    background: rgba(10, 24, 50, 0.78);
+    color: var(--school-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.teacher-app-menu-toggle:hover {
+    transform: translateY(-1px);
+    border-color: rgba(118, 241, 255, 0.58);
+    box-shadow: 0 12px 24px rgba(4, 12, 30, 0.24);
+}
+
+.teacher-app-menu-toggle-lines {
+    width: 22px;
+    display: grid;
+    gap: 4px;
+}
+
+.teacher-app-menu-toggle-lines span {
+    display: block;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--school-text);
+}
+
+.school-back-link,
+.school-ghost-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid var(--school-line);
+    background: rgba(10, 24, 50, 0.62);
+    color: var(--school-text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.school-back-link:hover,
+.school-ghost-button:hover,
+.school-action-button:hover {
+    transform: translateY(-1px);
+}
+
+.school-access-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(141, 242, 255, 0.36);
+    background: rgba(10, 24, 50, 0.72);
+    color: var(--school-cyan);
+    font-size: 0.98rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 28px rgba(6, 18, 44, 0.38);
+}
+
+.school-access-layout {
+    position: relative;
+    width: min(1380px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.school-login-shell {
+    width: min(760px, 100%);
+    margin: 0 auto;
+}
+
+.school-access-center-badge {
+    position: absolute;
+    left: 50%;
+    top: -18px;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 170px;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.school-access-center-badge::before,
+.school-access-center-badge::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.school-access-center-badge::before {
+    inset: 24px;
+    border: 1px solid rgba(118, 232, 255, 0.44);
+    box-shadow: 0 0 28px rgba(95, 225, 255, 0.28);
+}
+
+.school-access-center-badge::after {
+    inset: 0;
+    border: 1px solid rgba(118, 232, 255, 0.12);
+}
+
+.school-access-center-copy {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: radial-gradient(circle at 50% 35%, rgba(146, 248, 255, 0.2), rgba(9, 26, 58, 0.94));
+    border: 1px solid rgba(118, 232, 255, 0.36);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 20px 36px rgba(0, 0, 0, 0.34);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--school-text);
+}
+
+.school-access-center-copy span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--school-cyan);
+}
+
+.school-access-card {
+    position: relative;
+    min-height: 760px;
+    padding: 38px 34px 32px;
+    border-radius: 34px;
+    border: 1px solid var(--school-line);
+    background:
+        linear-gradient(180deg, rgba(89, 243, 255, 0.08), transparent 18%),
+        linear-gradient(145deg, rgba(16, 35, 69, 0.94), rgba(7, 18, 42, 0.92));
+    box-shadow: var(--school-shadow);
+    overflow: hidden;
+}
+
+.school-login-card {
+    min-height: auto;
+}
+
+.school-access-card::before,
+.school-access-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.school-access-card::before {
+    border-radius: 34px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 0 36px rgba(109, 225, 255, 0.08);
+}
+
+.school-access-card::after {
+    background:
+        radial-gradient(circle at 12% 16%, rgba(112, 225, 255, 0.24), transparent 18%),
+        radial-gradient(circle at 86% 82%, rgba(163, 128, 255, 0.18), transparent 20%);
+    opacity: 0.9;
+}
+
+.school-access-card.dos-card::after {
+    background:
+        radial-gradient(circle at 82% 24%, rgba(129, 201, 255, 0.24), transparent 18%),
+        radial-gradient(circle at 88% 82%, rgba(163, 128, 255, 0.28), transparent 22%),
+        radial-gradient(circle at 16% 76%, rgba(106, 234, 255, 0.12), transparent 18%);
+}
+
+.school-access-card-shell {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.school-access-card h1 {
+    margin: 22px 0 10px;
+    font-size: clamp(2.2rem, 3vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+}
+
+.school-access-copy {
+    margin: 0;
+    color: var(--school-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.school-access-icon-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 68px;
+}
+
+.school-stat-grid {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.school-stat-chip {
+    min-width: 74px;
+    padding: 10px 12px;
+    border-radius: 18px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.school-stat-chip strong {
+    display: block;
+    font-size: 1.2rem;
+}
+
+.school-stat-chip span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--school-muted);
+}
+
+.school-form-stack {
+    margin-top: 34px;
+    display: grid;
+    gap: 14px;
+}
+
+.school-form-field {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 68px;
+    padding: 0 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(117, 226, 255, 0.34);
+    background:
+        linear-gradient(90deg, rgba(88, 230, 255, 0.08), transparent 24%),
+        rgba(10, 24, 50, 0.72);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 0 24px rgba(79, 216, 255, 0.07);
+}
+
+.school-form-field:focus-within {
+    border-color: rgba(118, 241, 255, 0.64);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 4px rgba(95, 226, 255, 0.12),
+        0 0 30px rgba(95, 226, 255, 0.14);
+}
+
+.school-form-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    border: 1px solid rgba(118, 232, 255, 0.36);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--school-cyan);
+    font-size: 1.26rem;
+}
+
+.school-form-field input,
+.school-form-field select {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--school-text);
+    font-size: 1.05rem;
+}
+
+.school-form-field input::placeholder {
+    color: rgba(227, 241, 255, 0.7);
+}
+
+.school-action-button {
+    margin-top: 18px;
+    min-height: 72px;
+    border-radius: 20px;
+    border: 1px solid rgba(118, 241, 255, 0.56);
+    background:
+        linear-gradient(90deg, rgba(116, 255, 214, 0.22), rgba(88, 230, 255, 0.22)),
+        linear-gradient(180deg, rgba(34, 115, 140, 0.94), rgba(16, 74, 114, 0.94));
+    color: #f5ffff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 18px 34px rgba(8, 42, 66, 0.34);
+}
+
+.school-action-button.is-dos {
+    margin-top: 34px;
+    background:
+        linear-gradient(90deg, rgba(146, 170, 255, 0.18), rgba(88, 230, 255, 0.18)),
+        linear-gradient(180deg, rgba(58, 95, 146, 0.94), rgba(31, 60, 115, 0.94));
+}
+
+.school-action-button:disabled,
+.school-ghost-button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+
+.school-status-banner {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    padding: 16px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(117, 226, 255, 0.24);
+    background: rgba(8, 20, 44, 0.84);
+    color: var(--school-text);
+    text-align: center;
+    line-height: 1.65;
+    box-shadow: 0 18px 32px rgba(4, 12, 30, 0.3);
+}
+
+.school-status-banner[data-state="error"] {
+    border-color: rgba(255, 149, 171, 0.3);
+    color: var(--school-danger);
+}
+
+.school-status-banner[data-state="success"] {
+    border-color: rgba(116, 255, 214, 0.26);
+    color: #bfffe8;
+}
+
+.teacher-app-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(1, 8, 19, 0.68);
+    backdrop-filter: blur(4px);
+    z-index: 40;
+}
+
+.teacher-app-menu-overlay.hidden {
+    display: none;
+}
+
+.teacher-app-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(420px, 100vw);
+    height: 100vh;
+    padding: 22px 18px 18px;
+    border-right: 1px solid rgba(118, 241, 255, 0.22);
+    background:
+        linear-gradient(180deg, rgba(89, 243, 255, 0.08), transparent 12%),
+        linear-gradient(180deg, rgba(6, 17, 37, 0.98), rgba(5, 15, 32, 0.98));
+    box-shadow: 0 26px 50px rgba(0, 0, 0, 0.34);
+    z-index: 41;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 18px;
+}
+
+.teacher-app-menu.hidden {
+    display: none;
+}
+
+.teacher-app-menu-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.teacher-app-menu-title {
+    margin: 8px 0 0;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+}
+
+.teacher-app-menu-body {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.teacher-app-service-list {
+    display: grid;
+    gap: 12px;
+}
+
+.teacher-app-service-button {
+    min-height: 78px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--school-text);
+    text-align: left;
+    font: inherit;
+    display: grid;
+    gap: 6px;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.teacher-app-service-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(118, 241, 255, 0.5);
+    background: rgba(76, 206, 255, 0.12);
+}
+
+.teacher-app-service-button strong {
+    font-size: 1rem;
+}
+
+.teacher-app-service-button span,
+.teacher-app-menu-note {
+    color: var(--school-muted);
+    line-height: 1.6;
+}
+
+.teacher-app-menu-note {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 0.95rem;
+}
+
+.school-dos-copy-grid {
+    margin-top: 28px;
+    display: grid;
+    gap: 14px;
+}
+
+.school-dos-copy-card {
+    padding: 16px 18px;
+    border-radius: 18px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.school-dos-copy-card h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--school-cyan);
+}
+
+.school-dos-copy-card p {
+    margin: 0;
+    color: var(--school-muted);
+    line-height: 1.6;
+}
+
+.school-inline-link {
+    color: var(--school-cyan);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.school-portal-shell {
+    width: min(1360px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 22px;
+}
+
+.school-portal-body {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 22px;
+}
+
+.school-role-sidebar {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(117, 226, 255, 0.22);
+    background: rgba(8, 20, 44, 0.84);
+    box-shadow: 0 18px 32px rgba(4, 12, 30, 0.26);
+}
+
+.school-role-content {
+    min-width: 0;
+    display: grid;
+    gap: 22px;
+}
+
+.school-role-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 16px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--school-text);
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.school-role-link:hover,
+.school-role-link.is-active {
+    transform: translateY(-1px);
+    border-color: rgba(118, 241, 255, 0.58);
+    background: rgba(76, 206, 255, 0.16);
+}
+
+.school-portal-panel {
+    padding: 24px;
+    border-radius: 28px;
+    border: 1px solid var(--school-line);
+    background:
+        linear-gradient(180deg, rgba(89, 243, 255, 0.08), transparent 16%),
+        var(--school-panel);
+    box-shadow: var(--school-shadow);
+}
+
+.school-portal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.school-portal-title {
+    margin: 10px 0 0;
+    font-size: clamp(2rem, 2.6vw, 3rem);
+    letter-spacing: -0.04em;
+}
+
+.school-portal-copy {
+    margin: 10px 0 0;
+    color: var(--school-muted);
+    line-height: 1.7;
+    max-width: 780px;
+}
+
+.school-portal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.school-portal-metric {
+    padding: 18px;
+    border-radius: 22px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.school-portal-metric span {
+    display: block;
+    color: var(--school-muted);
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.school-portal-metric strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.4rem;
+}
+
+.school-portal-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.7fr) repeat(2, auto);
+    gap: 12px;
+    align-items: end;
+}
+
+.school-portal-select {
+    width: 100%;
+    min-height: 60px;
+    padding: 0 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(117, 226, 255, 0.34);
+    background: rgba(10, 24, 50, 0.72);
+    color: var(--school-text);
+    outline: none;
+    font: inherit;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 0 24px rgba(79, 216, 255, 0.07);
+}
+
+.school-tab-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.school-segment-button {
+    min-height: 56px;
+    padding: 0 18px;
+    border-radius: 16px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--school-text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.school-segment-button.is-active {
+    border-color: rgba(118, 241, 255, 0.58);
+    background: rgba(76, 206, 255, 0.16);
+    box-shadow: 0 14px 30px rgba(8, 42, 66, 0.2);
+}
+
+.school-assignment-stack {
+    display: grid;
+    gap: 18px;
+}
+
+.school-assignment-card {
+    padding: 18px;
+    border-radius: 22px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.school-assignment-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.school-assignment-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--school-cyan);
+}
+
+.school-assignment-table-wrap {
+    overflow-x: auto;
+    border-radius: 18px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(5, 16, 38, 0.76);
+}
+
+.school-assignment-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+
+.school-assignment-table th,
+.school-assignment-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.school-assignment-table th {
+    background: rgba(8, 22, 48, 0.92);
+    color: var(--school-cyan);
+    text-align: left;
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.school-assignment-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.school-assignment-table input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: 12px;
+    border: 1px solid var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--school-text);
+    outline: none;
+}
+
+.school-assignment-table input[readonly] {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--school-muted);
+}
+
+.school-empty-state {
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px dashed var(--school-line-soft);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--school-muted);
+    text-align: center;
+}
+
+@media (max-width: 1140px) {
+    .school-access-layout,
+    .school-portal-grid,
+    .school-portal-body {
+        grid-template-columns: 1fr;
+    }
+
+    .school-access-center-badge {
+        position: static;
+        left: auto;
+        top: auto;
+        transform: none;
+        justify-self: center;
+        margin-bottom: -12px;
+    }
+
+    .school-portal-toolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .school-role-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .school-access-page {
+        padding: 18px;
+    }
+
+    .school-access-card,
+    .school-portal-panel {
+        padding: 22px 18px;
+    }
+
+    .school-access-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .teacher-app-topbar-leading {
+        width: 100%;
+    }
+
+    .teacher-app-menu {
+        width: 100vw;
+    }
+
+    .school-marks-toolbar,
+    .school-portal-toolbar {
+        grid-template-columns: 1fr;
+    }
+}
